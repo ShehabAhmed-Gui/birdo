@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Resoruces/fullScreen.png</file>
+        <file>Resoruces/fullScreen_Btm.png</file>
+        <file>Resoruces/MiniMize.png</file>
+        <file>Resoruces/Pause.png</file>
+        <file>Resoruces/Play.png</file>
+        <file>Resoruces/restoreDown.png</file>
+        <file>Resoruces/Speaker.png</file>
+        <file>Resoruces/Exit.png</file>
+        <file>Resoruces/reWind.png</file>
+        <file>Resoruces/Muted.png</file>
+        <file>Resoruces/appIcon.png</file>
+        <file>Resoruces/1350708.png</file>
+    </qresource>
+</RCC>

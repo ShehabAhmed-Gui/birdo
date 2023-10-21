@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Resoruces/pause-xxl.png</file>
+        <file>Resoruces/play-icon-18-256.png</file>
+        <file>Resoruces/speaker-xxl.png</file>
+        <file>Resoruces/images.png</file>
+        <file>../../QtDeisgner-icons/red-black-icons/3818211.png</file>
+        <file>Resoruces/MiniMize.png</file>
+        <file>Resoruces/wrong-icon.png</file>
+        <file>Resoruces/icons8-minimize-50.png</file>
+        <file>Resoruces/full_screen.png</file>
+    </qresource>
+</RCC>
