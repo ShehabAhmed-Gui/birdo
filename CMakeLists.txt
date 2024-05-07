@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.25)
 project(Birdo VERSION 1.0.0 LANGUAGES CXX)
 set(CMAKE_PREFIX_PATH "G:/Qt/6.5.0/mingw_64/lib/cmake/Qt6/")
 set(CMAKE_CXX_STANDARD 17)
