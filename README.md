@@ -28,13 +28,13 @@ It is a personal project, But feel free to contribute!
 1. First you need **Qt 6.5.3** (Tested version, You can use another version and see if it works), You can download Qt for windows from here:
 - [Qt online installer](https://www.qt.io/download-open-source)
 
+2. Install CMake if required. Recommended CMake version is 3.25, Install CMake from [here](https://cmake.org/download/)
+
 ### Required Qt modules to be installed:
 
 - Qt Shader Tools
 - Qt Network
 - Qt Multimedia
-
-2. Install CMake if required. Recommended CMake version is 3.25, Install CMake from [here](https://cmake.org/download/)
 
 ## How to build the project
 If you are using **QtCreator IDE** you can directly open the **CMakeLists.txt** file and configure the project with the desired Qt Version
