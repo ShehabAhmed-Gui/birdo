@@ -26,8 +26,10 @@ It is a personal project, But feel free to contribute!
 ## Required tools for building the appliaction on windows
 
 1. First you need **Qt 6.5.3** (Tested version, You can use another version and see if it works), You can download Qt for windows from here:
-- [Qt online installed](https://www.qt.io/download-open-source)
-Required Qt modules to be installed:
+- [Qt online installer](https://www.qt.io/download-open-source)
+
+### Required Qt modules to be installed:
+
 - Qt Shader Tools
 - Qt Network
 - Qt Multimedia
