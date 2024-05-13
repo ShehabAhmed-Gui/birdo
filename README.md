@@ -11,6 +11,7 @@ Birdo is a Mediaplayer application, Play videos from your computer
 ## Links
 
 [Twitter (X)](https://twitter.com/Shehab_Ahmed05) - my Twitter
+[Telegram](https://t.me/ShehabGuii) - my Telegram
 
 ## Tech
 

@@ -64,3 +64,10 @@ set_target_properties(Birdo PROPERTIES
     AUTOMOC ON
     AUTOUIC ON
 )
+
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_LIST_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+include(CPack)

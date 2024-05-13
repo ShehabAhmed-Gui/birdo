@@ -54,13 +54,13 @@ private slots:
 
     void setDuration(qint64 duration);
     void setPosition(qint64 position);
-    void setMuted(bool muted);
+    void changeVolumeState(VolumeStates muted);
     void setVolumeText(float volume);
 signals:
     void setVideoFullScreen();
 private:
     QEvent *event;
-    QString loadVideo;
+    QStringList loadVideo;
     QString ToolStyle;
     qint64 maximum;
     double volumeRange;
@@ -84,7 +84,8 @@ private:
     QAbstractButton *MiniMize;
     QAbstractButton *fullScreen;
     QAbstractButton *btm_Button_fullScreen;
-    QAbstractButton *rewindButton;
+    QAbstractButton *seekBackwardButton;
+    QAbstractButton *seekForwardButton;
 
     QLabel *currVolume;
 public:

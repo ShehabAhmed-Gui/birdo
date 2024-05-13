@@ -3,35 +3,44 @@
 #include <QMediaPlayer>
 videocontrols::videocontrols(QWidget *parent) :QWidget(parent)
 {
-
 }
-
-void videocontrols::setState(QMediaPlayer::PlaybackState state)
+void videocontrols::setVideoState(QMediaPlayer::PlaybackState state)
 {
-    switch(state)
-    {
-        case QMediaPlayer::StoppedState:  m_state = VideoStates::Stopped;
-        case QMediaPlayer::PausedState: m_state = VideoStates::Paussed; break;
-        case QMediaPlayer::PlayingState: m_state = VideoStates::Playing; break;
-        default:
-            m_state = VideoStates::Stopped;
+    switch(state) {
+    case QMediaPlayer::StoppedState: m_state = VideoStates::Stopped;
+    case QMediaPlayer::PausedState: m_state = VideoStates::Paussed; break;
+    case QMediaPlayer::PlayingState: m_state = VideoStates::Playing; break;
+    default:
+        m_state = VideoStates::Stopped; break;
     }
 }
 
-void videocontrols::setRewind(qint64 position)
+void videocontrols::setVolumeState(bool state)
+{
+    switch(state) {
+    case VolumeStates::Muted: m_volumeStates = VolumeStates::Muted; break;
+    case VolumeStates::UnMuted:
+    default: m_volumeStates = VolumeStates::UnMuted; break;
+    }
+}
+
+void videocontrols::setVideoPosition(qint64 position)
 {
     rewindPos = position;
-    if(position > 10000){
-        rewindPos -= 10000;
-    }else{
-        rewindPos = 0;
-    }
 }
 
-void videocontrols::setMuted(bool muted)
+void videocontrols::setSeekBackward(qint64 position)
 {
-    if(muted != player_mute)
-        player_mute = muted;
+    position -= 10000;
+    rewindPos = position;
+    emit seekVideoPosition(rewindPos);
+}
+
+void videocontrols::setSeekForward(qint64 position)
+{
+    position += 10000;
+    rewindPos = position;
+    emit  seekVideoPosition(rewindPos);
 }
 
 void videocontrols::videoClicked()
@@ -40,8 +49,6 @@ void videocontrols::videoClicked()
     case VideoStates::Stopped: emit updateVideoState(m_state); break;
     case VideoStates::Paussed: emit updateVideoState(m_state); break;
     case VideoStates::Playing: emit updateVideoState(m_state); break;
-    default:
-        break;
     }
 }
 
@@ -50,18 +57,26 @@ void videocontrols::openFileClicked()
     emit openFile();
 }
 
-void videocontrols::rewindClicked()
+void videocontrols::rewindBackwardClicked()
 {
-    emit rewind(rewindPos);
+    setSeekBackward(rewindPos);
+}
+
+void videocontrols::rewindForwardClicked()
+{
+    setSeekForward(rewindPos);
 }
 
 void videocontrols::volumeSliderMoving(float pos)
 {
-    emit volumeChanging(pos /100);
+    emit volumeChanging(pos/100);
 }
 
 void videocontrols::muteClicked()
 {
-    emit muteChange(!player_mute);
+    switch(m_volumeStates) {
+    case VolumeStates::Muted: emit updateVolumeState(VolumeStates::Muted); break;
+    case VolumeStates::UnMuted: emit updateVolumeState(VolumeStates::UnMuted); break;
+    }
 }
 

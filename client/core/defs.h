@@ -26,8 +26,8 @@ namespace birdo
 
     enum VolumeStates
     {
-        Muted = 0,
-        UnMuted = 1
+        UnMuted = 0,
+        Muted = 1
     };
 }
 

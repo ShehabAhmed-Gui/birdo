@@ -16,27 +16,32 @@ class videocontrols : public QWidget
 public:
     videocontrols(QWidget *parent = nullptr);
 public slots:
-    void setRewind(qint64 position);
-    void setState(QMediaPlayer::PlaybackState state);
-    void setMuted(bool muted);
+    void setSeekBackward(qint64 position);
+    void setSeekForward(qint64 position);
+    void setVideoState(QMediaPlayer::PlaybackState state);
+    void setVolumeState(bool state);
+    void setVideoPosition(qint64 position);
 signals:
     void updateVideoState(VideoStates state);
+    void updateVolumeState(VolumeStates muted);
     void openFile();
-    void muteChange(bool mute);
+
     void volumeChanging(float volume);
-    void rewind(qint64);
+    void seekVideoPosition(qint64 pos);
 public slots:
     void videoClicked();
     void openFileClicked();
-    void rewindClicked();
+    void rewindBackwardClicked();
+    void rewindForwardClicked();
     void volumeSliderMoving(float pos);
     void muteClicked();
 private:
     VideoStates m_state;
+    VolumeStates m_volumeStates;
 
     qint64 rewindPos = 0;
     float currVolume;
-    bool player_mute;
+    bool player_mute = false;
     QMediaPlayer::PlaybackState player_state = QMediaPlayer::StoppedState;
 };
 

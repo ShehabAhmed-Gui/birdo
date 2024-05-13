@@ -26,7 +26,8 @@ Widget::Widget(QWidget *parent)
     MiniMize = ui->MiniMize_4;
     fullScreen = ui->Full_Restore_Screen_4;
     btm_Button_fullScreen = ui->Btm_fullScreen;
-    rewindButton = ui->seekBackWard;
+    seekBackwardButton = ui->seekBackWard;
+    seekForwardButton = ui->seekForWard;
     /*Widget*/
     Bottom = ui->Bottom;
     /*Labels*/
@@ -57,9 +58,10 @@ Widget::~Widget()
 }
 void Widget::loadvideo()
 {
-    controls->setState(player->playbackState());
-    controls->setMuted(audio->isMuted());
-    controls->setRewind(player->position());
+    controls->setVideoState(player->playbackState());
+    controls->setVolumeState(audio->isMuted());
+    controls->setSeekBackward(player->position());
+    controls->setSeekForward(player->position());
 
     editTheApp->setFullScreen(Widget::isFullScreen());
     connect(editTheApp, &adjustapp::fullScreenChange, this, &Widget::FullScreen);
@@ -71,9 +73,9 @@ void Widget::loadvideo()
     connect(controls, &videocontrols::updateVideoState, this, &Widget::changeVideoState);
     connect(playButton, &QAbstractButton::clicked, controls, &videocontrols::videoClicked);
 
-    connect(controls, &videocontrols::muteChange, this, &Widget::setMuted);
-    connect(audio, &QAudioOutput::mutedChanged, controls, &videocontrols::setMuted);
+    connect(audio, &QAudioOutput::mutedChanged, controls, &videocontrols::setVolumeState);
     connect(audioButton, &QAbstractButton::clicked, controls, &videocontrols::muteClicked);
+    connect(controls, &videocontrols::updateVolumeState, this, &Widget::changeVolumeState);
 
     /*setting the Video*/
     player->setAudioOutput(audio);
@@ -81,13 +83,15 @@ void Widget::loadvideo()
     player->setVideoOutput(video);
 
     connect(player, &QMediaPlayer::durationChanged, this, &Widget::setDuration);
+
+    connect(controls, &videocontrols::seekVideoPosition, player, &QMediaPlayer::setPosition);
     connect(player, &QMediaPlayer::positionChanged, this, &Widget::setPosition);
-    connect(controls, &videocontrols::rewind, player, &QMediaPlayer::setPosition);
+    connect(player, &QMediaPlayer::positionChanged, controls, &videocontrols::setVideoPosition);
 
-    connect(player, &QMediaPlayer::positionChanged, controls, &videocontrols::setRewind);
-    connect(rewindButton, &QAbstractButton::clicked, controls, &videocontrols::rewindClicked);
+    connect(seekBackwardButton, &QAbstractButton::clicked, controls, &videocontrols::rewindBackwardClicked);
+    connect(seekForwardButton, &QAbstractButton::clicked, controls, &videocontrols::rewindForwardClicked);
 
-    connect(player, &QMediaPlayer::playbackStateChanged, controls, &videocontrols::setState);
+    connect(player, &QMediaPlayer::playbackStateChanged, controls, &videocontrols::setVideoState);
     connect(player, &QMediaPlayer::hasVideoChanged, this, &Widget::play);
 }
 
@@ -110,11 +114,11 @@ void Widget::loadVolume()
 void Widget::openVideo()
 {
     openFile->setText("Proccesing");
-    loadVideo = QFileDialog::getOpenFileName(this, "select Video",
+    loadVideo = QFileDialog::getOpenFileNames(this, "select Video",
                                                          "/home", ("*.mp4 *.wav"));
     if(!loadVideo.isEmpty())
     {
-        player->setSource(QUrl::fromLocalFile(loadVideo));
+        player->setSource(QUrl::fromLocalFile(loadVideo[0]));
         openFile->setText("openFile");
         emit controls->updateVideoState(VideoStates::Stopped);
 
@@ -130,26 +134,25 @@ void Widget::setDuration(qint64 duration)
 
 void Widget::setPosition(qint64 position)
 {
-    if(!videoProgress->isSliderDown()){
-        videoProgress->setValue(position);}
+    videoProgress->setValue(position);
 }
 
-void Widget::setMuted(bool muted)
+void Widget::changeVolumeState(VolumeStates muted)
 {
-    if(muted)
+    if(muted == VolumeStates::Muted)
     {
-        audio->setMuted(muted);
-        audioButton->setIcon(QIcon(":/images/Muted.png"));
+        audio->setMuted(false);
+        audioButton->setIcon(QIcon(":/images/volume.png" ));
         audioButton->setToolTip("unMute");
     }
-    else
+    else if(muted == VolumeStates::UnMuted)
     {
-        audio->setMuted(muted);
-        audioButton->setIcon(QIcon(":/images/volume.png"));
+        audio->setMuted(true);
+        audioButton->setIcon(QIcon(":/images/Muted.png"));
         audioButton->setToolTip("Mute");
     }
-}
 
+}
 void Widget::setVolumeText(float volume)
 {
     volume = volume *100;
@@ -179,9 +182,9 @@ void Widget::seek(int currPosition)
 void Widget::changeVideoState(VideoStates state)
 {
     switch(state) {
-        case VideoStates::Stopped:
-        case VideoStates::Paussed: play(); break;
-        case VideoStates::Playing: pause(); break;
+    case VideoStates::Stopped:
+    case VideoStates::Paussed: play(); break;
+    case VideoStates::Playing: pause(); break;
     }
 }
 
