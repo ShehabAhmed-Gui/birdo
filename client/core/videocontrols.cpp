@@ -17,14 +17,15 @@ void videocontrols::setVideoState(QMediaPlayer::PlaybackState state)
 
 void videocontrols::setVolumeState(bool state)
 {
-    switch(state) {
+    switch((int)state) {
     case VolumeStates::Muted: m_volumeStates = VolumeStates::Muted; break;
     case VolumeStates::UnMuted:
-    default: m_volumeStates = VolumeStates::UnMuted; break;
+    default:
+        m_volumeStates = VolumeStates::UnMuted; break;
     }
 }
 
-void videocontrols::setVideoPosition(qint64 position)
+void videocontrols::setVideoPositionState(qint64 position)
 {
     rewindPos = position;
 }
@@ -79,4 +80,3 @@ void videocontrols::muteClicked()
     case VolumeStates::UnMuted: emit updateVolumeState(VolumeStates::UnMuted); break;
     }
 }
-

@@ -20,7 +20,7 @@ public slots:
     void setSeekForward(qint64 position);
     void setVideoState(QMediaPlayer::PlaybackState state);
     void setVolumeState(bool state);
-    void setVideoPosition(qint64 position);
+    void setVideoPositionState(qint64 position);
 signals:
     void updateVideoState(VideoStates state);
     void updateVolumeState(VolumeStates muted);
