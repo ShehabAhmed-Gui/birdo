@@ -2,6 +2,10 @@
 ## _Mediaplayer application_
 Birdo is a Mediaplayer application, Play videos from your computer
 
+![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/master/metadata/Images/Birdo-Controls-On.png)
+![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/master/metadata/Images/Birdo-Controls-Hiden.png)
+![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/master/metadata/Images/Birdo_Another_Photo.png)
+
 ## Features
 
 - Very easy to use - Select video from your computer, And that's it Birdo will play it
