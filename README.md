@@ -2,11 +2,11 @@
 ## _Mediaplayer application_
 Birdo is a Mediaplayer application, Play videos from your computer
 
-![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/master/metadata/Images/Birdo-Controls-On.png)
+![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/dev/metadata/Images/Birdo-Controls-On.png)
 
-![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/master/metadata/Images/Birdo-Controls-Hiden.png)
+![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/dev/metadata/Images/Birdo-Controls-Hiden.png)
 
-![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/master/metadata/Images/Birdo_Another_Photo.png)
+![Image](https://github.com/ShehabAhmed-Gui/Birdo/blob/dev/metadata/Images/Birdo_Another_Photo.png)
 
 ## Features
 
@@ -16,8 +16,8 @@ Birdo is a Mediaplayer application, Play videos from your computer
 
 ## Links
 
-[Twitter (X)](https://twitter.com/Shehab_Ahmed05) - my Twitter
-[Telegram](https://t.me/ShehabGuii) - my Telegram
+[Twitter (X)](https://twitter.com/Shehab_Ahmed05)
+[Telegram](https://t.me/ShehabGuii)
 
 ## Tech
 
@@ -35,7 +35,7 @@ It is a personal project, But feel free to contribute!
 1. First you need **Qt 6.5.3** (Tested version, You can use another version and see if it works), You can download Qt for windows from here:
 - [Qt online installer](https://www.qt.io/download-open-source)
 
-2. Install CMake if required. Recommended CMake version is 3.25, Install CMake from [here](https://cmake.org/download/)
+2. Install CMake if it is not already installed. Recommended CMake version is 3.25, Install CMake from [here](https://cmake.org/download/)
 
 ### Required Qt modules to be installed:
 
