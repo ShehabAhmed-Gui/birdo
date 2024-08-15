@@ -16,8 +16,7 @@ Birdo is a Mediaplayer application, Play videos from your computer
 
 ## Links
 
-[Twitter](https://twitter.com/Shehab_Ahmed05)
-
+[Twitter (X)](https://twitter.com/Shehab_Ahmed05)
 [Telegram](https://t.me/ShehabGuii)
 
 ## Tech
@@ -28,7 +27,7 @@ Birdo uses several open-source projects to work:
 
 ## Development
 
-It is a personal project, But feel free to contribute!
+It is a personal project, But feel free to contribute.
 
 ## Building source
 ## Required tools for building the appliaction on windows
@@ -36,7 +35,7 @@ It is a personal project, But feel free to contribute!
 1. First you need **Qt 6.5.3** (Tested version, You can use another version and see if it works), You can download Qt for windows from here:
 - [Qt online installer](https://www.qt.io/download-open-source)
 
-2. Install CMake if it is not already installed. Recommended CMake version is 3.25, Install CMake from [here](https://cmake.org/download/)
+2. Install CMake if it's not already installed. Recommended CMake version is 3.25, Install CMake from [here](https://cmake.org/download/)
 
 ### Required Qt modules to be installed:
 
