@@ -2,3 +2,6 @@ CMakeFiles/
 out/
 Generated/
 .vs/
+CMakeLists.txt.user
+CMakePresets.json
+CMakeUserPresets.json
