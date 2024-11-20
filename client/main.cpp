@@ -1,15 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-
-#include "core/customcursor.h"
-#include "core/player.h"
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-
-    qmlRegisterType<CursorHandler>("CustomCursor", 1, 0, "CursorHandler");
 
     QQmlApplicationEngine engine;
 
@@ -19,8 +15,6 @@ int main(int argc, char *argv[])
 
     if (engine.rootObjects().isEmpty())
         return -1;
-
-    Player player;
 
     return app.exec();
 }

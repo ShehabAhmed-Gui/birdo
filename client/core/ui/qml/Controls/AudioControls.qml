@@ -11,7 +11,7 @@ Item {
 
     function setMuted(muted) {
         switch (muted) {
-        case true:  video.muted = true; volumeButton.iconSource = "qrc:/images/mute.png"
+        case true: video.muted = true; volumeButton.iconSource = "qrc:/images/mute.png"
             break;
         case false: video.muted = false; volumeButton.iconSource = "qrc:/images/volume-high.png"
             break;
@@ -22,11 +22,8 @@ Item {
         anchors.fill: root
         spacing: 10
 
-        RegularButtonType {
+        CustomButton {
             id: volume
-            iconWidth: 20
-            iconHeight: 20
-            iconSource: "qrc:/images/volume-high.png"
 
             MouseArea {
                 anchors.fill: parent

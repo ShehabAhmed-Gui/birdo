@@ -163,12 +163,12 @@ Rectangle {
             Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
 
-            RegularButtonType {
+            CustomButton {
                 id: skipBackward
                 iconSource: "qrc:/images/svg/Previous_Icon_Dark.svg"
             }
 
-            RegularButtonType {
+            CustomButton {
                 id: seekBackward
                 iconSource: "qrc:/images/rewind-backward.png"
 
@@ -178,7 +178,7 @@ Rectangle {
                 }
             }
 
-            RegularButtonType {
+            CustomButton {
                 id: startStopButton
                 iconWidth: isMobileTarget? 25 : 40
                 iconHeight: isMobileTarget? 25 : 40
@@ -195,7 +195,7 @@ Rectangle {
                 }
             }
 
-            RegularButtonType {
+            CustomButton {
                 id: seekForward
                 iconSource: "qrc:/images/seek-forward.png"
 
@@ -205,12 +205,12 @@ Rectangle {
                 }
             }
 
-            RegularButtonType {
+            CustomButton {
                 id: skipForward
                 iconSource: "qrc:/images/svg/Next_Icon_Dark.svg"
             }
 
-            RegularButtonType {
+            CustomButton {
                 id: loop
 
                 visible: Screen.primaryOrientation === Qt.LandscapeOrientation
@@ -224,7 +224,6 @@ Rectangle {
 
         AudioControls {
             id: audioControl
-
 
             Layout.minimumWidth: isMobileTarget? 120 : 150
             Layout.maximumWidth: isMobileTarget? 120 : 150

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.Fusion
 import QtMultimedia
-import CustomCursor
+
 import "Controls"
 import "Components"
 
@@ -19,6 +19,14 @@ ApplicationWindow {
     color: "#000000"
     Component.onCompleted: {
         console.debug("Application Started")
+        video.play()
+    }
+
+    Timer {
+        id: hoverTimer
+        interval: 3000
+
+        onTriggered: showControls.start()
     }
 
     Timer {
@@ -26,11 +34,11 @@ ApplicationWindow {
         interval: 2500
         repeat: true
         onTriggered: {
+            showControls.start()
             if(bottomControls.isMediaSliderPressed) {
                 afkTimer.restart()
             } else {
                 hideControls.start()
-                customCursor.hideCursor(parent)
             }
         }
     }
@@ -42,33 +50,18 @@ ApplicationWindow {
 
         anchors.fill: parent
 
-        videoSource: isMobileTarget? "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" : "E:/songs/2019 das lo Jaius - äscg) g) äsélTaHBeCT - HnpBaHa - Jarico Remix.mp4"
+        source: "file:///home/charmylinuxer/Music/2Pac - Mask Off Oldschool Instrumental (My Chain remix).mp4"
         cursorWidth: 40
         cursorHeight: 40
-        enableCustomCursor: true
 
         onPlaybackStateChanged: bottomControls.videoStateChanged()
-        Component.onCompleted: isMobileTarget? video.play() : afkTimer.start()
 
-        CursorHandler {
-            id: customCursor
-        }
+        Component.onCompleted: afkTimer.start()
 
         MouseArea {
             id: videoMouseArea
             anchors.fill: parent
-            hoverEnabled: video.enableCustomCursor
-            cursorShape: Qt.ArrowCursor
-
-            Timer {
-                id: hoverTimer
-                interval: 50
-                onTriggered: {
-                    if (videoMouseArea.containsMouse) {
-                        customCursor.setCustomCursor(video, video.cursorPath, video.cursorWidth, video.cursorHeight)
-                    }
-                }
-            }
+            hoverEnabled: true
 
             onEntered: {
                 hoverTimer.start()
@@ -76,7 +69,6 @@ ApplicationWindow {
 
             onExited: {
                 hoverTimer.stop();
-                customCursor.resetDefaultCursor(video)
             }
 
             onClicked: {
@@ -88,7 +80,6 @@ ApplicationWindow {
                     afkTimer.restart()
                     showControls.start()
                 }
-                customCursor.setCustomCursor(parent, ":/images/video_cursor.png")
             }
         }
 

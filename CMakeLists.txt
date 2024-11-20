@@ -12,16 +12,9 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
 
 set(SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/client/main.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/player.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/videocontrols.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/customcursor.cpp
 )
 
 set(HEADERS
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/player.h
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/videocontrols.h
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/defs.h
-    ${CMAKE_CURRENT_LIST_DIR}/client/core/customcursor.h
 )
 
 qt_standard_project_setup()

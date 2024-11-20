@@ -33,8 +33,8 @@
         <file>images/svg/Shuffle_Icon_Dark.svg</file>
         <file>images/svg/Rate_Icon_Dark.svg</file>
         <file>ui/qml/Components/CustomSliderType.qml</file>
-        <file>ui/qml/Components/RegularButtonType.qml</file>
         <file>ui/qml/Controls/AudioControls.qml</file>
         <file>ui/qml/Controls/PlaybackSpeed.qml</file>
+        <file>ui/qml/Components/CustomButton.qml</file>
     </qresource>
 </RCC>
