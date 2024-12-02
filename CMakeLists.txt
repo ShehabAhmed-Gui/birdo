@@ -10,6 +10,9 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
     Core Gui Quick QuickControls2 Widgets
     Multimedia MultimediaWidgets)
 
+pkg_check_modules(libusb REQUIRED IMPORTED_TARGET libusb-1.0)
+pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavutil)
+
 set(SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/client/main.cpp
 )
@@ -32,15 +35,17 @@ set_target_properties(Birdo PROPERTIES
     MACOSX_BUNDLE TRUE
 )
 
-target_link_libraries(Birdo
-    PRIVATE Qt6::Core
-    PRIVATE Qt6::Gui
-    PRIVATE Qt6::Quick
-    PRIVATE Qt6::QuickControls2
-    PRIVATE Qt6::Widgets
-    PRIVATE Qt6::Multimedia
-    PRIVATE Qt6::MultimediaWidgets
-)
+target_link_libraries(Birdo PRIVATE
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Quick
+    Qt6::QuickControls2
+    Qt6::Widgets
+    Qt6::Multimedia
+    Qt6::MultimediaWidgets
+    PkgConfig::libusb
+    PkgConfig::FFMPEG
+    )
 
 include(GNUInstallDirs)
 install(TARGETS Birdo

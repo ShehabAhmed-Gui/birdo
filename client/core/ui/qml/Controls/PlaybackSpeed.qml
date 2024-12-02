@@ -8,6 +8,7 @@ Item {
     Layout.maximumWidth: 200
 
     property bool showPlaybackSpeedIcon: true
+    property alias playbackSlider: playBackSpeedSlider
 
     RowLayout {
         anchors.fill: parent

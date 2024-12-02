@@ -4,7 +4,6 @@ import "../Controls"
 
 Video {
     id: video
-
     fillMode: VideoOutput.PreserveAspectCrop
 
     property string videoSource

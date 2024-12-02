@@ -31,13 +31,14 @@ ApplicationWindow {
 
     Timer {
         id: afkTimer
-        interval: 2500
+        interval: 4000
         repeat: true
         onTriggered: {
-            showControls.start()
+
             if(bottomControls.isMediaSliderPressed) {
                 afkTimer.restart()
             } else {
+                rootMA.cursorShape = Qt.BlankCursor
                 hideControls.start()
             }
         }
@@ -49,8 +50,9 @@ ApplicationWindow {
         height: 500
 
         anchors.fill: parent
+        source: "file:///media/charmylinuxer/3c7444de-8cf4-43a8-8710-f3479c075606/songs/ЛИТВИНЕНКО - Оп, мусорок.mp4"
+        volume: 0.3
 
-        source: "file:///home/charmylinuxer/Music/2Pac - Mask Off Oldschool Instrumental (My Chain remix).mp4"
         cursorWidth: 40
         cursorHeight: 40
 
@@ -77,6 +79,7 @@ ApplicationWindow {
 
             onPositionChanged: {
                 if (!isMobileTarget) {
+                    rootMA.cursorShape = Qt.ArrowCursor
                     afkTimer.restart()
                     showControls.start()
                 }
@@ -110,6 +113,11 @@ ApplicationWindow {
         width: parent.width
         anchors.bottom: video.bottom
         color: "transparent"
+    }
+
+    MouseArea {
+        id: rootMA
+        anchors.fill: parent
     }
 
     ParallelAnimation {

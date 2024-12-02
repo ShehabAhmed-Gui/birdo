@@ -7,7 +7,9 @@ Item {
     Layout.minimumWidth: 150
     Layout.maximumWidth: 150
 
+    property alias volumeSlider: volumeSlider
     property alias volumeButton: volume
+    property alias volumeLevel: volumeSlider.value
 
     function setMuted(muted) {
         switch (muted) {
@@ -19,16 +21,24 @@ Item {
     }
 
     RowLayout {
+        id: audioRL
         anchors.fill: root
         spacing: 10
 
         CustomButton {
             id: volume
 
+            ToolTipType {
+                toolTipText: video.muted? "Unmute" : "Mute"
+            }
+
+            iconSource: volumeLevel === 0? "qrc:/images/mute.png" : volumeLevel <= 70? "qrc:/images/low-volume.png" : "qrc:/images/volume-high.png"
+            iconHeight: 18
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    video.muted? video.muted = setMuted(false) : setMuted(true)
+                    video.muted? setMuted(false) : setMuted(true)
                     parent.iconSource
                 }
             }
@@ -36,6 +46,9 @@ Item {
 
         CustomSliderType {
             id: volumeSlider
+
+            Layout.minimumWidth: 100
+            Layout.maximumWidth: 100
 
             enableGradiant: true
             gradiantFirstColor: "#04471c"
@@ -46,18 +59,19 @@ Item {
 
             from: 0
             to: 100
-            value: video.volume * 100
+            value: (video.volume * 100).toFixed()
 
             onValueChanged: {
                 video.volume = volumeSlider.value / 100
                 video.focus = true
             }
+
             Connections {
                 target: video
                 property int videoVolume
                 function onVolumeChanged() {
-                        videoVolume = video.volume * 100
-                        volumeSlider.value = videoVolume
+                    videoVolume = video.volume * 100
+                    volumeSlider.value = videoVolume
                 }
             }
 
@@ -66,7 +80,7 @@ Item {
         }
 
         Text {
-            id: volumeLevel
+            id: volumeLevelText
             text: volumeSlider.value
             font.pixelSize: 13
 

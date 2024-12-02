@@ -1,35 +1,37 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Fusion
+import QtQuick.Layouts
 
-Rectangle {
+Button {
     id: root
 
     property string backgroundColor: "transparent"
-    property string onHoverBackgroundColor: "#191919"
+    property string onHoverBackgroundColor: "#6b6a58"
+    property string buttonBorderColor: "transparent"
+
+    property double backgroundOpacity: 1
+    property double buttonRadius: width / 2
+
+    property bool isHovered: false
+
+    property int buttonWidth: iconWidth + 10
+    property int buttonHeight: iconHeight + 10
+
+    property int iconWidth: isMobileTarget? 10 : 18
+    property int iconHeight: isMobileTarget? 10 : 18
     property string iconSource
-    property alias hovered: btn.hovered
 
-    property int iconWidth: isMobileTarget? 12 : 18
-    property int iconHeight: isMobileTarget? 12 : 18
+    Layout.minimumWidth: buttonWidth
+    Layout.minimumHeight: buttonHeight
 
-
-    radius: 11
-
-    width: iconWidth + 10
-    height: iconHeight + 10
-    color: backgroundColor
-
-    Button {
-        id: btn
-
-        width: iconWidth
-        height: iconHeight
-
+    contentItem: Item {
         anchors.fill: parent
 
         Image {
+            id: buttonIcon
             anchors.centerIn: parent
+
             smooth: true
             width: iconWidth
             height: iconHeight
@@ -37,10 +39,31 @@ Rectangle {
         }
     }
 
-    MouseArea {
+    background: Rectangle {
+        id: backgroundRec
         anchors.fill: parent
-        hoverEnabled: true
-        onEntered: root.color = onHoverBackgroundColor
-        onExited: root.color = "transparent"
+        width: parent.width
+        height: parent.height
+
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            preventStealing: true
+            hoverEnabled: true
+            onEntered: {
+                controlHovered(true)
+                isHovered = true
+            }
+            onExited: {
+                controlHovered(false);
+                isHovered = false
+            }
+        }
+
+        radius: buttonRadius
+        opacity: backgroundOpacity
+        border.color: buttonBorderColor
+
+        color: root.isHovered? onHoverBackgroundColor : backgroundColor
     }
 }

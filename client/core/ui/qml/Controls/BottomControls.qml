@@ -12,8 +12,19 @@ Rectangle {
     radius: 7
     anchors.bottom: parent.bottom
 
-    property alias isMediaSliderPressed: videoSlider.pressed
+    property bool isMediaSliderPressed: videoSlider.pressed || audioControl.volumeSlider.pressed || playBackSpeed.playbackSlider.pressed
     property alias bottomOpacity: bottomOpacity
+
+    signal controlHovered(bool hovered)
+
+    onControlHovered: (hovered) => {
+        switch (hovered) {
+            case true: afkTimer.stop();
+                break;
+            case false: afkTimer.start();
+            break;
+        }
+    }
 
 
     function seekBackward() {
@@ -158,19 +169,27 @@ Rectangle {
 
         RowLayout {
             id: controlButtons
-            spacing: Screen.primaryOrientation === Qt.LandscapeOrientation ? 30 : 10
+            spacing: Screen.primaryOrientation === Qt.LandscapeOrientation ? 22 : 10
 
             Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
 
             CustomButton {
                 id: skipBackward
+                buttonRadius: 0
+
                 iconSource: "qrc:/images/svg/Previous_Icon_Dark.svg"
+                iconWidth: 18
+                iconHeight: 18
             }
 
             CustomButton {
                 id: seekBackward
                 iconSource: "qrc:/images/rewind-backward.png"
+
+                ToolTipType {
+                    toolTipText: "Seek 10s backward"
+                }
 
                 MouseArea {
                     anchors.fill: parent
@@ -180,13 +199,13 @@ Rectangle {
 
             CustomButton {
                 id: startStopButton
-                iconWidth: isMobileTarget? 25 : 40
-                iconHeight: isMobileTarget? 25 : 40
-                iconSource: "qrc:/images/play-button.png"
+                iconSource: video.playbackState === MediaPlayer.PlayingState? "qrc:/images/svg/Stop_Icon.svg" : "qrc:/images/play-button.png"
+                iconWidth: 33
+                iconHeight: 33
 
-                ToolTip.delay: 500
-                ToolTip.visible: hovered
-                ToolTip.text: qsTr("Play")
+                ToolTipType {
+                    toolTipText: video.playbackState === MediaPlayer.PlayingState? "Stop" : "Play"
+                }
 
                 onHoverBackgroundColor: "transparent"
                 MouseArea {
@@ -199,6 +218,10 @@ Rectangle {
                 id: seekForward
                 iconSource: "qrc:/images/seek-forward.png"
 
+                ToolTipType {
+                    toolTipText: "Seek 10s forward"
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: root.seekForward()
@@ -207,7 +230,10 @@ Rectangle {
 
             CustomButton {
                 id: skipForward
+                buttonRadius: 0
                 iconSource: "qrc:/images/svg/Next_Icon_Dark.svg"
+                iconWidth: 20
+                iconHeight: 20
             }
 
             CustomButton {
