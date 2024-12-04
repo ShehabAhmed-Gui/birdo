@@ -18,8 +18,16 @@ Slider {
     property int sliderWidth: 150
     property int sliderHeight: 7
 
+
+
     focus: false
     stepSize: 1
+
+    // MouseArea {
+    //     id: sliderMA
+    //     anchors.fill: parent
+    //     preventStealing: true
+    // }
 
     background: Rectangle {
         x: customSlider.leftPadding

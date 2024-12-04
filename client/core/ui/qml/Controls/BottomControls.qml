@@ -14,6 +14,7 @@ Rectangle {
 
     property bool isMediaSliderPressed: videoSlider.pressed || audioControl.volumeSlider.pressed || playBackSpeed.playbackSlider.pressed
     property alias bottomOpacity: bottomOpacity
+    property alias bottomMA: bottomControlsMouseArea
 
     signal controlHovered(bool hovered)
 

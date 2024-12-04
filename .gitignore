@@ -3,5 +3,7 @@ out/
 Generated/
 .vs/
 CMakeLists.txt.user
+CMakeLists.txt.autosave
 CMakePresets.json
 CMakeUserPresets.json
+build/

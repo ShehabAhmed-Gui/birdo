@@ -22,6 +22,7 @@ ApplicationWindow {
         video.play()
     }
 
+
     Timer {
         id: hoverTimer
         interval: 3000
@@ -38,7 +39,7 @@ ApplicationWindow {
             if(bottomControls.isMediaSliderPressed) {
                 afkTimer.restart()
             } else {
-                rootMA.cursorShape = Qt.BlankCursor
+                changeMouseCursor(false)
                 hideControls.start()
             }
         }
@@ -50,7 +51,7 @@ ApplicationWindow {
         height: 500
 
         anchors.fill: parent
-        source: "file:///media/charmylinuxer/3c7444de-8cf4-43a8-8710-f3479c075606/songs/ЛИТВИНЕНКО - Оп, мусорок.mp4"
+        source: "file:///media/charmylinuxer/3c7444de-8cf4-43a8-8710-f3479c075606/songs/Оп, мусорок.mp4"
         volume: 0.3
 
         cursorWidth: 40
@@ -64,6 +65,7 @@ ApplicationWindow {
             id: videoMouseArea
             anchors.fill: parent
             hoverEnabled: true
+            preventStealing: true
 
             onEntered: {
                 hoverTimer.start()
@@ -79,7 +81,7 @@ ApplicationWindow {
 
             onPositionChanged: {
                 if (!isMobileTarget) {
-                    rootMA.cursorShape = Qt.ArrowCursor
+                    changeMouseCursor(true);
                     afkTimer.restart()
                     showControls.start()
                 }
@@ -110,14 +112,10 @@ ApplicationWindow {
 
     BottomControls {
         id: bottomControls
-        width: parent.width
         anchors.bottom: video.bottom
-        color: "transparent"
-    }
 
-    MouseArea {
-        id: rootMA
-        anchors.fill: parent
+        width: parent.width
+        color: "transparent"
     }
 
     ParallelAnimation {
@@ -150,4 +148,20 @@ ApplicationWindow {
             easing.type: Easing.InOutQuad
         }
     }
+
+    function changeMouseCursor(state) {
+        switch (state) {
+            case true:
+                videoMouseArea.cursorShape = Qt.ArrowCursor;
+                bottomControls.bottomMA.cursorShape = Qt.ArrowCursor;
+                break;
+            case false:
+                videoMouseArea.cursorShape = Qt.BlankCursor;
+                bottomControls.bottomMA.cursorShape = Qt.BlankCursor;
+                break;
+            default:
+            break;
+        }
+    }
+
 }
