@@ -23,14 +23,23 @@ ApplicationWindow {
         console.debug("Application Started")
 
         // load settings
-        bottomControls.audio.setMuted(soundMuted)
+        bottomControls.audioType.setMuted(soundMuted)
         video.volume = AppSettings.getSetting("Audio", "volume") / 100
-        video.play()
+
+        video.source = Qt.url(AppSettings.getSetting("Video", "video"))
+        video.seek(AppSettings.getSetting("Video", "position") * 1000)
     }
 
-    Component.onDestruction: {
+    onClosing: {
+        console.log("Writing Settings. Settings saved in:", AppSettings.getSettLocation())
+
+        //save audio settings
         AppSettings.saveSettings("Audio", "volume", (video.volume * 100).toFixed());
         AppSettings.saveSettings("Audio", "muted", video.muted);
+
+        //save video settings
+        AppSettings.saveSettings("Video", "position", video.position / 1000)
+        AppSettings.saveSettings("Video", "video", video.source.toString())
     }
 
     Timer {
@@ -45,7 +54,6 @@ ApplicationWindow {
         interval: 4000
         repeat: true
         onTriggered: {
-
             if(bottomControls.isMediaSliderPressed) {
                 afkTimer.restart()
             } else {
@@ -61,7 +69,7 @@ ApplicationWindow {
         height: 500
 
         anchors.fill: parent
-        source: "file:///home/charmylinuxer/D/songs/Оп, мусорок.mp4"
+        source: "file:///home/charmylinuxer/D/songs/Tu Mi Corazon.mp4"
         volume: 0.3
 
         cursorWidth: 40
@@ -70,6 +78,8 @@ ApplicationWindow {
         onPlaybackStateChanged: bottomControls.videoStateChanged()
 
         Component.onCompleted: afkTimer.start()
+
+        onSourceChanged: AppSettings.saveSettings("Video", "video", source.toString())
 
         MouseArea {
             id: videoMouseArea

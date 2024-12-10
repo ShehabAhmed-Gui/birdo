@@ -4,12 +4,10 @@ SettingsManager::SettingsManager(QObject *parent)
     : QObject{parent},
     m_settings(QSettings::NativeFormat, QSettings::UserScope, "Birdo", "Birdo"),
     m_settingsLocation(m_settings.fileName())
-{qDebug() << "Called";}
+{}
 
 SettingsManager::~SettingsManager()
-{
-    m_settings.clear();
-}
+{}
 
 void SettingsManager::saveSettings(const QString &group, QString key, QVariant data) {
     m_settings.beginGroup(group);

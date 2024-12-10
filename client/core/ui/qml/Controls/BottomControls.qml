@@ -12,7 +12,8 @@ Rectangle {
     radius: 7
     anchors.bottom: parent.bottom
 
-    property alias audio: audioControl
+    property alias audioType: audioControl
+    property alias playBackSpeedType: playBackSpeed
 
     property bool isMediaSliderPressed: videoSlider.pressed || audioControl.volumeSlider.pressed || playBackSpeed.playbackSlider.pressed
     property alias bottomOpacity: bottomOpacity
@@ -28,7 +29,6 @@ Rectangle {
             break;
         }
     }
-
 
     function seekBackward() {
         video.seek(video.position -= 10000)
@@ -238,8 +238,8 @@ Rectangle {
                 id: skipForward
                 buttonRadius: 0
                 iconSource: "qrc:/images/svg/Next_Icon_Dark.svg"
-                iconWidth: 20
-                iconHeight: 20
+                iconWidth: 18
+                iconHeight: 18
             }
 
             CustomButton {

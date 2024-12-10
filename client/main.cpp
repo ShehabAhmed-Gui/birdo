@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:/ui/qml/Main.qml")));
 
-    app.setWindowIcon(QIcon(":/images/appIcon.png"));
+    app.setWindowIcon(QIcon(":/images/icon.png"));
 
     if (engine.rootObjects().isEmpty())
         return -1;

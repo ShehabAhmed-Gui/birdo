@@ -37,5 +37,6 @@
         <file>ui/qml/Controls/PlaybackSpeed.qml</file>
         <file>ui/qml/Components/CustomButton.qml</file>
         <file>ui/qml/Components/ToolTipType.qml</file>
+        <file>images/icon.png</file>
     </qresource>
 </RCC>
