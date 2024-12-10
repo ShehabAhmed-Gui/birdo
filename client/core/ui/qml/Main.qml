@@ -2,13 +2,15 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.Fusion
 import QtMultimedia
+import com.qt.birdo 1.0
 
 import "Controls"
 import "Components"
 
 ApplicationWindow {
     id: root
-    readonly property bool isMobileTarget : Qt.platform.os === "android" || Qt.platform.os === "ios"
+    readonly property bool isMobileTarget: Qt.platform.os === "android" || Qt.platform.os === "ios"
+    readonly property bool soundMuted: AppSettings.getSetting("Audio", "muted")
 
     width: 1200
     height: 780
@@ -19,9 +21,17 @@ ApplicationWindow {
     color: "#000000"
     Component.onCompleted: {
         console.debug("Application Started")
+
+        // load settings
+        bottomControls.audio.setMuted(soundMuted)
+        video.volume = AppSettings.getSetting("Audio", "volume") / 100
         video.play()
     }
 
+    Component.onDestruction: {
+        AppSettings.saveSettings("Audio", "volume", (video.volume * 100).toFixed());
+        AppSettings.saveSettings("Audio", "muted", video.muted);
+    }
 
     Timer {
         id: hoverTimer
@@ -51,7 +61,7 @@ ApplicationWindow {
         height: 500
 
         anchors.fill: parent
-        source: "file:///media/charmylinuxer/3c7444de-8cf4-43a8-8710-f3479c075606/songs/Оп, мусорок.mp4"
+        source: "file:///home/charmylinuxer/D/songs/Оп, мусорок.mp4"
         volume: 0.3
 
         cursorWidth: 40

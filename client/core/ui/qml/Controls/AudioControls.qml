@@ -37,6 +37,7 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
+                cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
                 onClicked: {
                     video.muted? setMuted(false) : setMuted(true)
                     parent.iconSource
@@ -54,7 +55,7 @@ Item {
             gradiantFirstColor: "#04471c"
             gradiantSecondColor: "#054a29"
             subPageColor: "#111d13"
-            handleColor: "#111d13"
+            handleColor: "#00563B"
             sliderHeight: 7
 
             from: 0

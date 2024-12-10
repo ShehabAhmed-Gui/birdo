@@ -50,6 +50,8 @@ Button {
             anchors.fill: parent
             preventStealing: true
             hoverEnabled: true
+            cursorShape: isHovered ? Qt.PointingHandCursor : Qt.ArrowCursor
+
             onEntered: {
                 controlHovered(true)
                 isHovered = true

@@ -12,6 +12,8 @@ Rectangle {
     radius: 7
     anchors.bottom: parent.bottom
 
+    property alias audio: audioControl
+
     property bool isMediaSliderPressed: videoSlider.pressed || audioControl.volumeSlider.pressed || playBackSpeed.playbackSlider.pressed
     property alias bottomOpacity: bottomOpacity
     property alias bottomMA: bottomControlsMouseArea
@@ -195,6 +197,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: root.seekBackward()
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
                 }
             }
 
@@ -212,6 +215,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
                 }
             }
 
@@ -226,6 +230,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: root.seekForward()
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
                 }
             }
 
