@@ -2,6 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+
+import com.qt.birdo 1.0
+
 import "../Components"
 
 Rectangle {
@@ -148,19 +151,20 @@ Rectangle {
     RowLayout {
         id: playerControls
         anchors.fill: root
+        width: parent.width
 
         Item {
             visible: Screen.primaryOrientation === Qt.LandscapeOrientation
             Layout.fillWidth: true
             Layout.minimumWidth: 40
-            Layout.maximumWidth: 95
+            Layout.maximumWidth: 70
         }
 
         PlaybackSpeed {
             id: playBackSpeed
             showPlaybackSpeedIcon: Screen.primaryOrientation === Qt.LandscapeOrientation
 
-            Layout.minimumWidth: isMobileTarget? 120 :150
+            Layout.minimumWidth: isMobileTarget? 120 : 150
             Layout.maximumWidth: isMobileTarget? 120 : 150
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -172,9 +176,9 @@ Rectangle {
 
         RowLayout {
             id: controlButtons
-            spacing: Screen.primaryOrientation === Qt.LandscapeOrientation ? 22 : 10
+            spacing: Screen.primaryOrientation === Qt.LandscapeOrientation ? 17 : 10
 
-            Layout.alignment: Qt.AlignHCenter
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Layout.fillWidth: true
 
             CustomButton {
@@ -256,17 +260,47 @@ Rectangle {
 
         AudioControls {
             id: audioControl
-
             Layout.minimumWidth: isMobileTarget? 120 : 150
             Layout.maximumWidth: isMobileTarget? 120 : 150
             Layout.fillHeight: true
             Layout.fillWidth: true
+
+            Layout.rightMargin: 30
         }
 
         Item {
             Layout.fillWidth: true
             Layout.minimumWidth: 40
             Layout.maximumWidth: 95
+
+            CustomButton {
+                id: openVideoBtn
+                anchors.centerIn: parent
+                width: 70
+                height: 30
+
+                backgroundColor: "transparent"
+                onHoverBackgroundColor: "#1A1A19"
+                buttonBorderColor: "green"
+                buttonRadius: 5
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        video.source = AppManager.selectFile()
+                        video.play()
+                    }
+                }
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Open Video"
+                    color: "#ffffff"
+                    font.pixelSize: 11
+                    font.weight: 300
+                }
+            }
         }
     }
 }

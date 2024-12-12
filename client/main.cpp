@@ -3,16 +3,19 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QIcon>
+#include <QApplication>
 
 #include "settingsmanager.h"
+#include "appmanager.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    qmlRegisterSingletonInstance<SettingsManager>("com.qt.birdo", 1, 0, "AppSettings", new SettingsManager());
+    QApplication app(argc, argv);
 
-    QGuiApplication app(argc, argv);
+    qmlRegisterSingletonInstance<SettingsManager>("com.qt.birdo", 1, 0, "AppSettings", new SettingsManager(&app));
+    qmlRegisterSingletonInstance("com.qt.birdo", 1, 0, "AppManager", new AppManager(&app));
 
     QQmlApplicationEngine engine;
 

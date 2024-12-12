@@ -69,7 +69,7 @@ ApplicationWindow {
         height: 500
 
         anchors.fill: parent
-        source: "file:///home/charmylinuxer/D/songs/Tu Mi Corazon.mp4"
+        source: AppSettings.getSetting("Video", "video")
         volume: 0.3
 
         cursorWidth: 40

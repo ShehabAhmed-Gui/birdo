@@ -25,6 +25,7 @@ qt_add_executable(Birdo
     ${SOURCES}
     ${HEADERS}
     client/settingsmanager.h client/settingsmanager.cpp
+    client/appmanager.h client/appmanager.cpp
 )
 
 set_target_properties(Birdo PROPERTIES
