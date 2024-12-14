@@ -284,13 +284,19 @@ Rectangle {
                 buttonBorderColor: "green"
                 buttonRadius: 5
 
+                ToolTipType {
+                    toolTipText: "Open local video"
+                }
+
                 MouseArea {
                     anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
 
                     onClicked: {
                         video.source = AppManager.selectFile()
                         video.play()
                     }
+
                 }
 
                 Text {

@@ -138,8 +138,27 @@ ApplicationWindow {
         color: "transparent"
     }
 
+    PlayList {
+        id: playlist
+
+        width: 300
+        height: parent.height - bottomControls.height
+
+        NumberAnimation {
+            id: changePlaylistHeight
+            target: playlist
+            property: "height"
+            to: bottomControls.opacity === 1? root.height - bottomControls.height : root.height
+            duration: 300
+            easing.type: Easing.InCurve
+        }
+
+        anchors.right: parent.right
+    }
+
     ParallelAnimation {
         id: hideControls
+        onStopped: changePlaylistHeight.start()
 
         NumberAnimation {
             targets: bottomControls
@@ -147,11 +166,13 @@ ApplicationWindow {
             to: 0
             duration: 1000
             easing.type: Easing.InOutQuad
+
         }
     }
 
     ParallelAnimation {
         id: showControls
+        onStopped: changePlaylistHeight.start()
 
         NumberAnimation {
             targets: bottomControls
@@ -166,6 +187,30 @@ ApplicationWindow {
             to: 0.40
             duration: 500
             easing.type: Easing.InOutQuad
+        }
+    }
+
+    ParallelAnimation {
+        id: showPlayList
+
+        NumberAnimation {
+            target: playlist
+            property: "width"
+            to: 300
+            duration: 300
+            easing.type: Easing.InCurve
+        }
+    }
+
+    ParallelAnimation {
+        id: hidePlaylist
+
+        NumberAnimation {
+            target: playlist
+            property: "width"
+            to: 0
+            duration: 300
+            easing.type: Easing.InCurve
         }
     }
 
