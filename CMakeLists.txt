@@ -12,9 +12,15 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
 
 set(SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/client/main.cpp
+    client/settings/settingsManager.cpp
+    client/filesManager/filesManager.cpp
+    client/model/listmodel.cpp
 )
 
 set(HEADERS
+    client/settings/settingsManager.h
+    client/filesManager/filesManager.h
+    client/model/listmodel.h
 )
 
 qt_standard_project_setup()
@@ -24,8 +30,6 @@ qt6_add_resources(SOURCES "client/core/resources.qrc")
 qt_add_executable(Birdo
     ${SOURCES}
     ${HEADERS}
-    client/settingsmanager.h client/settingsmanager.cpp
-    client/appmanager.h client/appmanager.cpp
 )
 
 set_target_properties(Birdo PROPERTIES
@@ -42,7 +46,7 @@ target_link_libraries(Birdo PRIVATE
     Qt6::Widgets
     Qt6::Multimedia
     Qt6::MultimediaWidgets
-    )
+)
 
 include(GNUInstallDirs)
 install(TARGETS Birdo

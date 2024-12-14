@@ -1,4 +1,4 @@
-#include "settingsmanager.h"
+#include "settingsManager.h"
 
 SettingsManager::SettingsManager(QObject *parent)
     : QObject{parent},

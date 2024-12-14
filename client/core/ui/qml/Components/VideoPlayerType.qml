@@ -4,7 +4,7 @@ import "../Controls"
 
 Video {
     id: video
-    fillMode: VideoOutput.PreserveAspectCrop
+    fillMode: VideoOutput.Stretch
 
     property string videoSource
     property int cursorWidth: 20

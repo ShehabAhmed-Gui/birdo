@@ -6,7 +6,7 @@
 #include <QStringList>
 #include <QDebug>
 
-#include "settingsmanager.h"
+#include "../settings/settingsManager.h"
 
 class AppManager : public QObject
 {
@@ -15,6 +15,8 @@ public:
     explicit AppManager(QObject *parent = nullptr);
 
     Q_INVOKABLE QString selectFile();
+
+    Q_INVOKABLE QVector<QString> selectFiles();
 
 private:
     QFileDialog m_dialog;
