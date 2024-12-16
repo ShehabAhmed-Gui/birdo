@@ -15,12 +15,12 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    qmlRegisterSingletonInstance<SettingsManager>("com.qt.birdo", 1, 0, "AppSettings", new SettingsManager(&app));
-    qmlRegisterSingletonInstance<AppManager>("com.qt.birdo", 1, 0, "AppManager", new AppManager(&app));
-
-    qmlRegisterType<ListModel>("com.qt.birdo", 1, 0, "VideosList");
-
     QQmlApplicationEngine engine;
+
+    qmlRegisterSingletonInstance<SettingsManager>("com.qt.birdo", 1, 0, "AppSettings", new SettingsManager(&app));
+    qmlRegisterSingletonInstance<FilesManager>("com.qt.birdo", 1, 0, "AppManager", new FilesManager(&app));
+
+    qmlRegisterType<ListModel>("com.qt.birdo", 1, 0, "MVideos");
 
     engine.load(QUrl(QStringLiteral("qrc:/ui/qml/Main.qml")));
 

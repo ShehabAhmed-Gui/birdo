@@ -140,20 +140,21 @@ ApplicationWindow {
 
     PlayList {
         id: playlist
-
         width: 300
-        height: parent.height - bottomControls.height
+        height: parent.height - bottomControls.height - 20
+
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: 10
 
         NumberAnimation {
             id: changePlaylistHeight
             target: playlist
             property: "height"
-            to: bottomControls.opacity === 1? root.height - bottomControls.height : root.height
+            to: bottomControls.opacity === 1? root.height - bottomControls.height - 10 : root.height - 20
             duration: 300
             easing.type: Easing.InCurve
         }
-
-        anchors.right: parent.right
     }
 
     ParallelAnimation {

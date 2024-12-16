@@ -1,8 +1,9 @@
 #include "listmodel.h"
+#include <qcolor.h>
 
-ListModel::ListModel(QObject *parent) : QAbstractListModel(parent)
+ListModel::ListModel(QObject *parent) : QAbstractListModel{parent}
 {
-    m_data = filesManager.selectFiles();
+    m_data = QColor::colorNames();
 }
 
 int ListModel::rowCount(const QModelIndex &parent) const
@@ -20,9 +21,15 @@ QVariant ListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (role == Qt::DisplayRole) {
-        return m_data.value(row);
+    if (role == Qt::UserRole) {
+        QString koko = m_data.at(row).split('/').last().split('.').first();
+        return koko;
     }
 
     return QVariant();
+}
+
+QHash<int, QByteArray> ListModel::roleNames() const
+{
+    return {{Qt::UserRole, "name"}};
 }
