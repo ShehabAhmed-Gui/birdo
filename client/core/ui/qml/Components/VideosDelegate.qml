@@ -10,6 +10,20 @@ Rectangle {
     height: 40
     radius: 11
 
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            var clickedVideo = path;
+            if (Qt.platform.os === "linux") {
+                clickedVideo = "file://" + path;
+            }
+
+            video.source = clickedVideo
+            video.play()
+        }
+    }
+
     Text {
         text: name
         color: "#D8D2C2"

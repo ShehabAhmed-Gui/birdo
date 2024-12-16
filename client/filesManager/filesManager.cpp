@@ -31,5 +31,6 @@ QString FilesManager::selectFile()
 
 QVector<QString> FilesManager::selectFiles()
 {
-    return m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath);
+    auto selected =  m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath);
+    return selected;
 }

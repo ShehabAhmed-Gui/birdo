@@ -151,7 +151,7 @@ ApplicationWindow {
             id: changePlaylistHeight
             target: playlist
             property: "height"
-            to: bottomControls.opacity === 1? root.height - bottomControls.height - 10 : root.height - 20
+            to: bottomControls.opacity === 1? root.height - bottomControls.height - 20 : root.height - 20
             duration: 300
             easing.type: Easing.InCurve
         }

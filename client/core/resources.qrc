@@ -40,5 +40,7 @@
         <file>images/icon.png</file>
         <file>ui/qml/Controls/PlayList.qml</file>
         <file>ui/qml/Components/VideosDelegate.qml</file>
+        <file>images/svg/playlist.svg</file>
+        <file>images/svg/plus.svg</file>
     </qresource>
 </RCC>

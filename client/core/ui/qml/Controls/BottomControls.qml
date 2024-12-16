@@ -22,17 +22,6 @@ Rectangle {
     property alias bottomOpacity: bottomOpacity
     property alias bottomMA: bottomControlsMouseArea
 
-    signal controlHovered(bool hovered)
-
-    onControlHovered: (hovered) => {
-        switch (hovered) {
-            case true: afkTimer.stop();
-                break;
-            case false: afkTimer.start();
-            break;
-        }
-    }
-
     function seekBackward() {
         video.seek(video.position -= 10000)
     }
@@ -276,16 +265,17 @@ Rectangle {
             CustomButton {
                 id: openVideoBtn
                 anchors.centerIn: parent
-                width: 70
+
+                width: 30
                 height: 30
 
                 backgroundColor: "transparent"
                 onHoverBackgroundColor: "#1A1A19"
-                buttonBorderColor: "green"
-                buttonRadius: 5
+
+                iconSource: "qrc:/images/svg/playlist.svg"
 
                 ToolTipType {
-                    toolTipText: "Open local video"
+                    toolTipText: "Open Playlist"
                 }
 
                 MouseArea {
@@ -293,18 +283,8 @@ Rectangle {
                     cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
 
                     onClicked: {
-                        video.source = AppManager.selectFile()
-                        video.play()
+                        playlist.width > 0? hidePlaylist.start() : showPlayList.start()
                     }
-
-                }
-
-                Text {
-                    anchors.centerIn: parent
-                    text: "Open Video"
-                    color: "#ffffff"
-                    font.pixelSize: 11
-                    font.weight: 300
                 }
             }
         }

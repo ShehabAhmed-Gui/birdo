@@ -3,7 +3,6 @@
 
 ListModel::ListModel(QObject *parent) : QAbstractListModel{parent}
 {
-    m_data = QColor::colorNames();
 }
 
 int ListModel::rowCount(const QModelIndex &parent) const
@@ -21,9 +20,15 @@ QVariant ListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (role == Qt::UserRole) {
-        QString koko = m_data.at(row).split('/').last().split('.').first();
-        return koko;
+    switch(role) {
+        case name:
+            return m_data.at(row).split('/').last().split('.').first();
+            break;
+        case path:
+            return m_data.at(row);
+            break;
+
+        default: return QVariant();
     }
 
     return QVariant();
@@ -31,5 +36,29 @@ QVariant ListModel::data(const QModelIndex &index, int role) const
 
 QHash<int, QByteArray> ListModel::roleNames() const
 {
-    return {{Qt::UserRole, "name"}};
+    return {
+        {name, "name"},
+        {path, "path"}
+    };
+}
+
+bool ListModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (role == Qt::UserRole) {
+        m_data[index.row()] = value.toString();
+
+        return true;
+    }
+
+    return false;
+}
+
+void ListModel::loadVideos()
+{
+    auto selected = filesManager.selectFiles();
+
+    beginInsertRows(QModelIndex(), m_data.size(), m_data.size() + selected.size() - 1);
+    m_data.append(selected);
+    endInsertRows();
+
 }

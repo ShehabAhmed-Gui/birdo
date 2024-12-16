@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Controls.Fusion
 import QtQuick.Layouts
 
+import "../Controls"
+
 Button {
     id: root
 
@@ -15,12 +17,23 @@ Button {
 
     property bool isHovered: false
 
-    property int buttonWidth: iconWidth + 10
-    property int buttonHeight: iconHeight + 10
-
     property int iconWidth: isMobileTarget? 10 : 18
     property int iconHeight: isMobileTarget? 10 : 18
     property string iconSource
+
+    property int buttonWidth: iconWidth + 10
+    property int buttonHeight: iconHeight + 10
+
+    signal controlHovered(bool hovered)
+
+    onControlHovered: (hovered) => {
+        switch (hovered) {
+            case true: afkTimer.stop();
+                break;
+            case false: afkTimer.start();
+            break;
+        }
+    }
 
     Layout.minimumWidth: buttonWidth
     Layout.minimumHeight: buttonHeight
@@ -57,7 +70,7 @@ Button {
                 isHovered = true
             }
             onExited: {
-                controlHovered(false);
+                controlHovered(false)
                 isHovered = false
             }
         }
