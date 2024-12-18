@@ -33,7 +33,7 @@ qt_add_executable(Birdo
     ${HEADERS}
 )
 
-qt_add_translations(Birdo TS_FILES client/Birdo_en_US.ts)
+qt_add_translations(Birdo TS_FILES client/core//translation/Birdo_en_US.ts)
 
 set_target_properties(Birdo PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}

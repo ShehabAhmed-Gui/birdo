@@ -31,6 +31,15 @@ QString FilesManager::selectFile()
 
 QVector<QString> FilesManager::selectFiles()
 {
-    auto selected =  m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath);
+    auto selected =  m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath, supportedVids);
+
+#ifdef Q_OS_LINUX
+    QVector<QString> linuxFiles;
+    for (QString &file : selected) {
+        linuxFiles.append("file://" + file);
+    }
+    return linuxFiles;
+#endif
+
     return selected;
 }

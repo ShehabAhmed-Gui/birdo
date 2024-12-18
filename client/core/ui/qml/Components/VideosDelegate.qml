@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtMultimedia
 
 Rectangle {
     id: root
@@ -10,31 +11,47 @@ Rectangle {
     height: 40
     radius: 11
 
+    CustomButton {
+        id: playVideo
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            var clickedVideo = path;
-            if (Qt.platform.os === "linux") {
-                clickedVideo = "file://" + path;
+        iconSource: video.source.toString() === path && video.playbackState === MediaPlayer.PlayingState
+            ? "qrc:/images/svg/Stop_Icon.svg"
+            : "qrc:/images/svg/play.svg"
+
+        iconWidth: 16
+        iconHeight: 16
+
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+            onClicked: {
+                if (video.source.toString() === path && video.playbackState === MediaPlayer.PlayingState) {
+                    video.pause()
+                } else {
+                    video.source = path
+                    video.play()
+                }
             }
-
-            video.source = clickedVideo
-            video.play()
         }
     }
 
     Text {
+        id: videoName
         text: name
         color: "#D8D2C2"
 
         width: parent.width - 10
 
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: playVideo.right
+        anchors.leftMargin: 7
 
-        font.pixelSize: 12
+        font.pixelSize: 13
         font.weight: 400
 
         wrapMode: Text.WordWrap

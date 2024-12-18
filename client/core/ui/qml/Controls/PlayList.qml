@@ -12,6 +12,9 @@ Rectangle {
     radius: 8
     border.color: "#685752"
 
+    property alias currentItem: listView.currentItem
+    property alias currentIndex: listView.currentIndex
+
     MouseArea {
         anchors.fill: parent
         preventStealing: true
@@ -52,6 +55,7 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
 
                     onClicked:  listModel.loadVideos();
                 }

@@ -10,7 +10,7 @@ import "../Components"
 Rectangle {
     id: root
     width: parent.width
-    height: 150
+    height: 120
     color: "transparent"
     radius: 7
     anchors.bottom: parent.bottom
@@ -141,6 +141,7 @@ Rectangle {
         id: playerControls
         anchors.fill: root
         width: parent.width
+        anchors.centerIn: parent
 
         Item {
             visible: Screen.primaryOrientation === Qt.LandscapeOrientation
@@ -205,6 +206,7 @@ Rectangle {
                 }
 
                 onHoverBackgroundColor: "transparent"
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
@@ -235,12 +237,12 @@ Rectangle {
                 iconHeight: 18
             }
 
-            CustomButton {
-                id: loop
+            // CustomButton {
+            //     id: loop
 
-                visible: Screen.primaryOrientation === Qt.LandscapeOrientation
-                iconSource: "qrc:/images/svg/Loop_Icon_Dark.svg"
-            }
+            //     visible: Screen.primaryOrientation === Qt.LandscapeOrientation
+            //     iconSource: "qrc:/images/svg/Loop_Icon_Dark.svg"
+            // }
         }
 
         Item {
@@ -253,40 +255,45 @@ Rectangle {
             Layout.maximumWidth: isMobileTarget? 120 : 150
             Layout.fillHeight: true
             Layout.fillWidth: true
-
-            Layout.rightMargin: 30
         }
 
         Item {
             Layout.fillWidth: true
-            Layout.minimumWidth: 40
-            Layout.maximumWidth: 95
+            Layout.minimumWidth: 30
+            Layout.maximumWidth: 30
+        }
 
-            CustomButton {
-                id: openVideoBtn
-                anchors.centerIn: parent
+        CustomButton {
+            id: playListBtn
+            Layout.alignment: Qt.AlignVCenter
 
-                width: 30
-                height: 30
+            width: 30
+            height: 30
 
-                backgroundColor: "transparent"
-                onHoverBackgroundColor: "#1A1A19"
 
-                iconSource: "qrc:/images/svg/playlist.svg"
+            backgroundColor: "transparent"
+            onHoverBackgroundColor: "#1A1A19"
 
-                ToolTipType {
-                    toolTipText: "Open Playlist"
-                }
+            iconSource: "qrc:/images/svg/playlist.svg"
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+            ToolTipType {
+                toolTipText: "Open Playlist"
+            }
 
-                    onClicked: {
-                        playlist.width > 0? hidePlaylist.start() : showPlayList.start()
-                    }
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                onClicked: {
+                    playlist.width > 0? hidePlaylist.start() : showPlayList.start()
                 }
             }
+        }
+
+        Item {
+            Layout.fillWidth: true
+            Layout.minimumWidth: 20
+            Layout.maximumWidth: 20
         }
     }
 }

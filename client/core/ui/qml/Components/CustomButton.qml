@@ -37,6 +37,8 @@ Button {
 
     Layout.minimumWidth: buttonWidth
     Layout.minimumHeight: buttonHeight
+    width: buttonWidth
+    height: buttonHeight
 
     contentItem: Item {
         anchors.fill: parent

@@ -42,5 +42,6 @@
         <file>ui/qml/Components/VideosDelegate.qml</file>
         <file>images/svg/playlist.svg</file>
         <file>images/svg/plus.svg</file>
+        <file>images/svg/play.svg</file>
     </qresource>
 </RCC>

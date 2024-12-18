@@ -152,7 +152,7 @@ ApplicationWindow {
             target: playlist
             property: "height"
             to: bottomControls.opacity === 1? root.height - bottomControls.height - 20 : root.height - 20
-            duration: 300
+            duration: 150
             easing.type: Easing.InCurve
         }
     }
