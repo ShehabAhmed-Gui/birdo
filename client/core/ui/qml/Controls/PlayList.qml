@@ -4,7 +4,6 @@ import com.qt.birdo 1.0
 
 import "../Components"
 
-
 Rectangle {
     id: root
 
@@ -12,8 +11,7 @@ Rectangle {
     radius: 8
     border.color: "#685752"
 
-    property alias currentItem: listView.currentItem
-    property alias currentIndex: listView.currentIndex
+    property alias listView: listView
 
     MouseArea {
         anchors.fill: parent
@@ -64,15 +62,30 @@ Rectangle {
 
         ListView {
             id: listView
+
             Layout.fillHeight: true
             Layout.fillWidth: true
+
+            signal playNext()
+            signal playPrevious()
 
             model: listModel
 
             spacing: 20
             clip: true
 
-            delegate: VideosDelegate {}
+            delegate: VideosDelegate {
+            }
+
+            onPlayNext: {
+                video.source = Qt.url(listModel.getNext(currentIndex))
+                video.play()
+            }
+
+            onPlayPrevious: {
+                video.source = Qt.url(listModel.getPrevious(currentIndex))
+                video.play()
+            }
         }
 
         MVideos {
@@ -80,5 +93,3 @@ Rectangle {
         }
     }
 }
-
-

@@ -5,6 +5,8 @@ ListModel::ListModel(QObject *parent) : QAbstractListModel{parent}
 {
 }
 
+qsizetype ListModel::currentIndex = 0;
+
 int ListModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
@@ -55,10 +57,36 @@ bool ListModel::setData(const QModelIndex &index, const QVariant &value, int rol
 
 void ListModel::loadVideos()
 {
+    currentIndex = 0;
     auto selected = filesManager.selectFiles();
 
     beginInsertRows(QModelIndex(), m_data.size(), m_data.size() + selected.size() - 1);
     m_data.append(selected);
     endInsertRows();
+}
 
+QString ListModel::getPrevious(const qsizetype &index) const
+{
+    currentIndex = index;
+    if (currentIndex <= 0) {
+        currentIndex = m_data.size();
+    }
+
+    if (currentIndex > 0) {
+        return m_data.at(currentIndex - 1);
+    }
+    return QString();
+}
+
+QString ListModel::getNext(const qsizetype &index) const
+{
+    currentIndex = index;
+    if (currentIndex >= m_data.size() - 1) {
+        currentIndex = -1;
+    }
+
+    if (currentIndex >= -1) {
+        return m_data.at(currentIndex + 1);
+    }
+    return QString();
 }

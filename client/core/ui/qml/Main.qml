@@ -12,6 +12,8 @@ ApplicationWindow {
     readonly property bool isMobileTarget: Qt.platform.os === "android" || Qt.platform.os === "ios"
     readonly property bool soundMuted: AppSettings.getSetting("Audio", "muted")
 
+    property alias videoState: video.playbackState
+
     width: 1200
     height: 780
     minimumHeight: 460
@@ -96,7 +98,7 @@ ApplicationWindow {
             }
 
             onClicked: {
-                video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
+                videoState === MediaPlayer.PlayingState? video.pause() : video.play()
             }
 
             onPositionChanged: {
@@ -115,13 +117,13 @@ ApplicationWindow {
             onTriggered: video.focus = true
         }
 
-        Keys.onSpacePressed: video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
+        Keys.onSpacePressed: videoState === MediaPlayer.PlayingState? video.pause() : video.play()
         Keys.onLeftPressed: bottomControls.seekBackward()
         Keys.onRightPressed: bottomControls.seekForward()
 
         Keys.onPressed: (key) => {
             if (key.key === Qt.Key_K) {
-                 if(video.playbackState === MediaPlayer.PlayingState) {
+                 if(vvideoState === MediaPlayer.PlayingState) {
                     video.pause()
                  } else {
                     video.play()

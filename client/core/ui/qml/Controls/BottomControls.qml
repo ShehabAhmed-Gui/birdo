@@ -178,6 +178,19 @@ Rectangle {
                 iconSource: "qrc:/images/svg/Previous_Icon_Dark.svg"
                 iconWidth: 18
                 iconHeight: 18
+
+                ToolTipType {
+                    toolTipText: "Skip To Previous Video"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                    onClicked: {
+                        playlist.listView.playPrevious()
+                    }
+                }
             }
 
             CustomButton {
@@ -235,6 +248,18 @@ Rectangle {
                 iconSource: "qrc:/images/svg/Next_Icon_Dark.svg"
                 iconWidth: 18
                 iconHeight: 18
+
+                ToolTipType {
+                    toolTipText: "Skip To Next Video"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: {
+                        playlist.listView.playNext()
+                    }
+                }
             }
 
             // CustomButton {
@@ -270,14 +295,13 @@ Rectangle {
             width: 30
             height: 30
 
-
             backgroundColor: "transparent"
             onHoverBackgroundColor: "#1A1A19"
 
             iconSource: "qrc:/images/svg/playlist.svg"
 
             ToolTipType {
-                toolTipText: "Open Playlist"
+                toolTipText: playlist.width > 0? "Hide Playlist" : "Open Playlist"
             }
 
             MouseArea {

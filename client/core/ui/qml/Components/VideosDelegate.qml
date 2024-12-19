@@ -5,31 +5,72 @@ import QtMultimedia
 Rectangle {
     id: root
     color: "#1A1A1D"
-    anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
+    anchors.horizontalCenter: parent? parent.horizontalCenter : undefined
     width: parent? parent.width - 20 : 20
+
+    property bool isCurrentlyPlaying: video.source.toString() === path
+
+    function setCurrentIndex() {
+        listView.currentIndex = index
+    }
+
+    Component.onCompleted: {
+        // Schedule the code for the next available event loop iteration
+        Qt.callLater(() => {
+            if (isCurrentlyPlaying) {
+                if (listView) {
+                    listView.currentIndex = index;
+                }
+            }
+        });
+    }
+
+    Connections {
+        target: listView
+        enabled: isCurrentlyPlaying
+        function onPlayNext() {
+            setCurrentIndex()
+        }
+    }
+
+    Connections {
+        target: listView
+        enabled: isCurrentlyPlaying
+        function onPlayPrevious() {
+            setCurrentIndex()
+        }
+    }
+
+    border.color: isCurrentlyPlaying? "#04471c" : "transparent"
+    border.width: 0.5
 
     height: 40
     radius: 11
 
     CustomButton {
         id: playVideo
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.verticalCenter: parent.verticalCenter
 
-        iconSource: video.source.toString() === path && video.playbackState === MediaPlayer.PlayingState
+        iconSource:  isCurrentlyPlaying && videoState === MediaPlayer.PlayingState
             ? "qrc:/images/svg/Stop_Icon.svg"
             : "qrc:/images/svg/play.svg"
 
-        iconWidth: 16
-        iconHeight: 16
+        onHoverBackgroundColor: "#000000"
 
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
+        iconWidth: 18
+        iconHeight: 18
+        width: 24
+        height: 24
 
         MouseArea {
             anchors.fill: parent
             cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
 
             onClicked: {
-                if (video.source.toString() === path && video.playbackState === MediaPlayer.PlayingState) {
+                listView.currentIndex = index
+                if (isCurrentlyPlaying && video.playbackState === MediaPlayer.PlayingState) {
                     video.pause()
                 } else {
                     video.source = path
