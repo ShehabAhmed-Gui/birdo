@@ -58,11 +58,15 @@ bool ListModel::setData(const QModelIndex &index, const QVariant &value, int rol
 void ListModel::loadVideos()
 {
     currentIndex = 0;
-    auto selected = filesManager.selectFiles();
+    QVector<QString> selected = filesManager.selectFiles();
 
-    beginInsertRows(QModelIndex(), m_data.size(), m_data.size() + selected.size() - 1);
-    m_data.append(selected);
-    endInsertRows();
+      for (const auto& item : selected) {
+        if (!m_data.contains(item)) {
+            beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
+            m_data.append(item);
+            endInsertRows();
+        }
+    }
 }
 
 QString ListModel::getPrevious(const qsizetype &index) const

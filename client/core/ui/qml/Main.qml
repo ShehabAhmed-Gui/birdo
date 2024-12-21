@@ -123,7 +123,7 @@ ApplicationWindow {
 
         Keys.onPressed: (key) => {
             if (key.key === Qt.Key_K) {
-                 if(vvideoState === MediaPlayer.PlayingState) {
+                 if(videoState === MediaPlayer.PlayingState) {
                     video.pause()
                  } else {
                     video.play()
