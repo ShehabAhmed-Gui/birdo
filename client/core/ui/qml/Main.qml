@@ -79,6 +79,10 @@ ApplicationWindow {
 
         onPlaybackStateChanged: bottomControls.videoStateChanged()
 
+        onStopped: {
+            playlist.listView.playNext()
+        }
+
         Component.onCompleted: afkTimer.start()
 
         onSourceChanged: AppSettings.saveSettings("Video", "video", source.toString())
