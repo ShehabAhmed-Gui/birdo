@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/appIcon.png</file>
         <file>images/loop_off.png</file>
         <file>images/loop_on.png</file>
         <file>images/low-volume.png</file>
@@ -16,9 +15,6 @@
         <file>images/svg/Loop_Icon.svg</file>
         <file>images/svg/Loop_Playlist.svg</file>
         <file>images/svg/Next_Icon.svg</file>
-        <file>images/svg/Play_Icon.svg</file>
-        <file>images/svg/Playlist_Active.svg</file>
-        <file>images/svg/Playlist_Icon.svg</file>
         <file>images/svg/Previous_Icon.svg</file>
         <file>images/svg/Rate_Icon.svg</file>
         <file>images/svg/Settings_Icon.svg</file>
@@ -28,7 +24,6 @@
         <file>images/svg/Stop_Icon.svg</file>
         <file>images/svg/Loop_Icon_Dark.svg</file>
         <file>images/svg/Next_Icon_Dark.svg</file>
-        <file>images/svg/Playlist_Icon_Dark.svg</file>
         <file>images/svg/Previous_Icon_Dark.svg</file>
         <file>images/svg/Shuffle_Icon_Dark.svg</file>
         <file>images/svg/Rate_Icon_Dark.svg</file>

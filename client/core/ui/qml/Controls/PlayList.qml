@@ -79,7 +79,9 @@ Rectangle {
 
             onPlayNext: {
                 video.source = Qt.url(listModel.getNext(currentIndex))
-                video.play()
+                Qt.callLater(() => {
+                    video.play()
+                });
             }
 
             onPlayPrevious: {

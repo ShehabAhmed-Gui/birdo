@@ -9,6 +9,15 @@ SettingsManager::SettingsManager(QObject *parent)
 SettingsManager::~SettingsManager()
 {}
 
+QStringList SettingsManager::getKeys(QString group)
+{
+    m_settings.beginGroup(group);
+    auto keys = m_settings.allKeys();
+    m_settings.endGroup();
+
+    return keys;
+}
+
 void SettingsManager::saveSettings(const QString &group, QString key, QVariant data) {
     m_settings.beginGroup(group);
 

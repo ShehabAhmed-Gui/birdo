@@ -14,6 +14,9 @@ public:
 
     ~SettingsManager();
 
+
+    QStringList getKeys(QString group);
+
     Q_INVOKABLE inline QString getSettLocation() const {
         return m_settingsLocation;
     }

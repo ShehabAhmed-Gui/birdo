@@ -13,7 +13,7 @@ class ListModel : public QAbstractListModel
 public:
     ListModel(QObject *parent = 0);
 
-    ~ListModel() {};
+    ~ListModel();
 
 enum data {
     name = Qt::UserRole,
@@ -35,6 +35,7 @@ public:
 private:
     QVector<QString> m_data;
     FilesManager filesManager;
+    SettingsManager settings;
     static qsizetype currentIndex;
 };
 

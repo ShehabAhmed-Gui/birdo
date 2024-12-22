@@ -13,8 +13,9 @@ class FilesManager : public QObject
     Q_OBJECT
 public:
     explicit FilesManager(QObject *parent = nullptr);
+    ~FilesManager();
 
-    Q_INVOKABLE QString selectFile();
+    // Q_INVOKABLE QString selectFile();
 
     Q_INVOKABLE QVector<QString> selectFiles();
 
@@ -26,6 +27,7 @@ private:
     QString m_selected;
 
     SettingsManager settings;
+    QStringList selectedFiles;
 };
 
 #endif // APPMANAGER_H

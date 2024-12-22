@@ -3,6 +3,21 @@
 
 ListModel::ListModel(QObject *parent) : QAbstractListModel{parent}
 {
+    beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
+    for (const QString &item : settings.getKeys("Playlist")) {
+        const QString &playlistItem = settings.getSetting("Playlist", item).toString();
+        m_data.append(playlistItem);
+    }
+    endInsertRows();
+}
+
+ListModel::~ListModel()
+{
+    for (int i = 0; i < m_data.count(); i++) {
+        const QString &file = m_data[i];
+        const QString &item = QString("Item") + QString::number(i);
+        settings.saveSettings("Playlist", item, file);
+    }
 }
 
 qsizetype ListModel::currentIndex = 0;

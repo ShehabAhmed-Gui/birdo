@@ -77,12 +77,6 @@ ApplicationWindow {
         cursorWidth: 40
         cursorHeight: 40
 
-        onPlaybackStateChanged: bottomControls.videoStateChanged()
-
-        onStopped: {
-            playlist.listView.playNext()
-        }
-
         Component.onCompleted: afkTimer.start()
 
         onSourceChanged: AppSettings.saveSettings("Video", "video", source.toString())

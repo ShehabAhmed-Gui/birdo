@@ -3,43 +3,51 @@
 FilesManager::FilesManager(QObject *parent)
     : QObject{parent}, supportedVids("*.mp4 *.wav"), settings{SettingsManager()}
 {
-    m_defaultPath = settings.getSetting("Files", "lastSelectedPath").toString().remove("file://");
+    m_defaultPath = settings.getSetting("VideosPath", "lastSelectedPath").toString().remove("file://");
 }
 
-QString FilesManager::selectFile()
+FilesManager::~FilesManager()
 {
-    m_defaultPath = settings.getSetting("Files", "lastSelectedPath").toString().remove("file://");
-
-    QString file = m_dialog.getOpenFileName(nullptr, "Select video file", m_defaultPath, supportedVids);
-
-#ifdef Q_OS_LINUX
-    if (!file.isEmpty()) {
-        file = "file://" + file;
-        settings.saveSettings("Files", "lastSelectedPath", file);
-        return file;
+    if (!selectedFiles.isEmpty()) {
+        const QString &videosPath = selectedFiles.last();
+        settings.saveSettings("VideosPath", "lastSelectedPath", videosPath);
     }
-#endif
-
-    if (!file.isEmpty()) {
-        settings.saveSettings("Files", "lastSelectedPath", file);
-        return file;
-    }
-
-    //return last saved video (current running video)
-    return settings.getSetting("Video", "video").toString();
 }
+
+// QString FilesManager::selectFile()
+// {
+//     m_defaultPath = settings.getSetting("VideosPath", "lastSelectedPath").toString().remove("file://");
+
+//     QString file = m_dialog.getOpenFileName(nullptr, "Select video file", m_defaultPath, supportedVids);
+
+// #ifdef Q_OS_LINUX
+//     if (!file.isEmpty()) {
+//         file = "file://" + file;
+//         settings.saveSettings("VideosPath", "lastSelectedPath", file);
+//         return file;
+//     }
+// #endif
+
+//     if (!file.isEmpty()) {
+//         settings.saveSettings("VideosPath", "lastSelectedPath", file);
+//         return file;
+//     }
+
+//     //return last saved video (current running video)
+//     return settings.getSetting("Video", "video").toString();
+// }
 
 QVector<QString> FilesManager::selectFiles()
 {
-    auto selected =  m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath, supportedVids);
+    selectedFiles = m_dialog.getOpenFileNames(nullptr, "Select A Bunch Of Videos", m_defaultPath, supportedVids);
 
 #ifdef Q_OS_LINUX
     QVector<QString> linuxFiles;
-    for (QString &file : selected) {
+    for (QString &file : selectedFiles) {
         linuxFiles.append("file://" + file);
     }
     return linuxFiles;
 #endif
 
-    return selected;
+    return selectedFiles;
 }
