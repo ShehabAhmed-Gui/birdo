@@ -10,7 +10,7 @@ import "../Components"
 Rectangle {
     id: root
     width: parent.width
-    height: 150
+    height: 120
     color: "transparent"
     radius: 7
     anchors.bottom: parent.bottom
@@ -21,17 +21,6 @@ Rectangle {
     property bool isMediaSliderPressed: videoSlider.pressed || audioControl.volumeSlider.pressed || playBackSpeed.playbackSlider.pressed
     property alias bottomOpacity: bottomOpacity
     property alias bottomMA: bottomControlsMouseArea
-
-    signal controlHovered(bool hovered)
-
-    onControlHovered: (hovered) => {
-        switch (hovered) {
-            case true: afkTimer.stop();
-                break;
-            case false: afkTimer.start();
-            break;
-        }
-    }
 
     function seekBackward() {
         video.seek(video.position -= 10000)
@@ -152,6 +141,7 @@ Rectangle {
         id: playerControls
         anchors.fill: root
         width: parent.width
+        anchors.centerIn: parent
 
         Item {
             visible: Screen.primaryOrientation === Qt.LandscapeOrientation
@@ -188,6 +178,19 @@ Rectangle {
                 iconSource: "qrc:/images/svg/Previous_Icon_Dark.svg"
                 iconWidth: 18
                 iconHeight: 18
+
+                ToolTipType {
+                    toolTipText: "Skip To Previous Video"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                    onClicked: {
+                        playlist.listView.playPrevious()
+                    }
+                }
             }
 
             CustomButton {
@@ -216,6 +219,7 @@ Rectangle {
                 }
 
                 onHoverBackgroundColor: "transparent"
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
@@ -244,14 +248,26 @@ Rectangle {
                 iconSource: "qrc:/images/svg/Next_Icon_Dark.svg"
                 iconWidth: 18
                 iconHeight: 18
+
+                ToolTipType {
+                    toolTipText: "Skip To Next Video"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: {
+                        playlist.listView.playNext()
+                    }
+                }
             }
 
-            CustomButton {
-                id: loop
+            // CustomButton {
+            //     id: loop
 
-                visible: Screen.primaryOrientation === Qt.LandscapeOrientation
-                iconSource: "qrc:/images/svg/Loop_Icon_Dark.svg"
-            }
+            //     visible: Screen.primaryOrientation === Qt.LandscapeOrientation
+            //     iconSource: "qrc:/images/svg/Loop_Icon_Dark.svg"
+            // }
         }
 
         Item {
@@ -264,43 +280,44 @@ Rectangle {
             Layout.maximumWidth: isMobileTarget? 120 : 150
             Layout.fillHeight: true
             Layout.fillWidth: true
-
-            Layout.rightMargin: 30
         }
 
         Item {
             Layout.fillWidth: true
-            Layout.minimumWidth: 40
-            Layout.maximumWidth: 95
+            Layout.minimumWidth: 30
+            Layout.maximumWidth: 30
+        }
 
-            CustomButton {
-                id: openVideoBtn
-                anchors.centerIn: parent
-                width: 70
-                height: 30
+        CustomButton {
+            id: playListBtn
+            Layout.alignment: Qt.AlignVCenter
 
-                backgroundColor: "transparent"
-                onHoverBackgroundColor: "#1A1A19"
-                buttonBorderColor: "green"
-                buttonRadius: 5
+            width: 30
+            height: 30
 
-                MouseArea {
-                    anchors.fill: parent
+            backgroundColor: "transparent"
+            onHoverBackgroundColor: "#1A1A19"
 
-                    onClicked: {
-                        video.source = AppManager.selectFile()
-                        video.play()
-                    }
-                }
+            iconSource: "qrc:/images/svg/playlist.svg"
 
-                Text {
-                    anchors.centerIn: parent
-                    text: "Open Video"
-                    color: "#ffffff"
-                    font.pixelSize: 11
-                    font.weight: 300
+            ToolTipType {
+                toolTipText: playlist.width > 0? "Hide Playlist" : "Open Playlist"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                onClicked: {
+                    playlist.width > 0? hidePlaylist.start() : showPlayList.start()
                 }
             }
+        }
+
+        Item {
+            Layout.fillWidth: true
+            Layout.minimumWidth: 20
+            Layout.maximumWidth: 20
         }
     }
 }

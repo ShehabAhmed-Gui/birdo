@@ -12,6 +12,8 @@ ApplicationWindow {
     readonly property bool isMobileTarget: Qt.platform.os === "android" || Qt.platform.os === "ios"
     readonly property bool soundMuted: AppSettings.getSetting("Audio", "muted")
 
+    property alias videoState: video.playbackState
+
     width: 1200
     height: 780
     minimumHeight: 460
@@ -77,6 +79,10 @@ ApplicationWindow {
 
         onPlaybackStateChanged: bottomControls.videoStateChanged()
 
+        onStopped: {
+            playlist.listView.playNext()
+        }
+
         Component.onCompleted: afkTimer.start()
 
         onSourceChanged: AppSettings.saveSettings("Video", "video", source.toString())
@@ -96,7 +102,7 @@ ApplicationWindow {
             }
 
             onClicked: {
-                video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
+                videoState === MediaPlayer.PlayingState? video.pause() : video.play()
             }
 
             onPositionChanged: {
@@ -115,13 +121,13 @@ ApplicationWindow {
             onTriggered: video.focus = true
         }
 
-        Keys.onSpacePressed: video.playbackState === MediaPlayer.PlayingState? video.pause() : video.play()
+        Keys.onSpacePressed: videoState === MediaPlayer.PlayingState? video.pause() : video.play()
         Keys.onLeftPressed: bottomControls.seekBackward()
         Keys.onRightPressed: bottomControls.seekForward()
 
         Keys.onPressed: (key) => {
             if (key.key === Qt.Key_K) {
-                 if(video.playbackState === MediaPlayer.PlayingState) {
+                 if(videoState === MediaPlayer.PlayingState) {
                     video.pause()
                  } else {
                     video.play()
@@ -138,8 +144,28 @@ ApplicationWindow {
         color: "transparent"
     }
 
+    PlayList {
+        id: playlist
+        width: 300
+        height: parent.height - bottomControls.height - 20
+
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: 10
+
+        NumberAnimation {
+            id: changePlaylistHeight
+            target: playlist
+            property: "height"
+            to: bottomControls.opacity === 1? root.height - bottomControls.height - 20 : root.height - 20
+            duration: 150
+            easing.type: Easing.InCurve
+        }
+    }
+
     ParallelAnimation {
         id: hideControls
+        onStopped: changePlaylistHeight.start()
 
         NumberAnimation {
             targets: bottomControls
@@ -147,11 +173,13 @@ ApplicationWindow {
             to: 0
             duration: 1000
             easing.type: Easing.InOutQuad
+
         }
     }
 
     ParallelAnimation {
         id: showControls
+        onStopped: changePlaylistHeight.start()
 
         NumberAnimation {
             targets: bottomControls
@@ -166,6 +194,30 @@ ApplicationWindow {
             to: 0.40
             duration: 500
             easing.type: Easing.InOutQuad
+        }
+    }
+
+    ParallelAnimation {
+        id: showPlayList
+
+        NumberAnimation {
+            target: playlist
+            property: "width"
+            to: 300
+            duration: 300
+            easing.type: Easing.InCurve
+        }
+    }
+
+    ParallelAnimation {
+        id: hidePlaylist
+
+        NumberAnimation {
+            target: playlist
+            property: "width"
+            to: 0
+            duration: 300
+            easing.type: Easing.InCurve
         }
     }
 

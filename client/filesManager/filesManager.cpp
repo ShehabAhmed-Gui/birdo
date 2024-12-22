@@ -1,12 +1,12 @@
 #include "filesManager.h"
 
-AppManager::AppManager(QObject *parent)
+FilesManager::FilesManager(QObject *parent)
     : QObject{parent}, supportedVids("*.mp4 *.wav"), settings{SettingsManager()}
 {
     m_defaultPath = settings.getSetting("Files", "lastSelectedPath").toString().remove("file://");
 }
 
-QString AppManager::selectFile()
+QString FilesManager::selectFile()
 {
     m_defaultPath = settings.getSetting("Files", "lastSelectedPath").toString().remove("file://");
 
@@ -29,7 +29,17 @@ QString AppManager::selectFile()
     return settings.getSetting("Video", "video").toString();
 }
 
-QVector<QString> AppManager::selectFiles()
+QVector<QString> FilesManager::selectFiles()
 {
-    return m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath);
+    auto selected =  m_dialog.getOpenFileNames(nullptr, "Select bunch of videos", m_defaultPath, supportedVids);
+
+#ifdef Q_OS_LINUX
+    QVector<QString> linuxFiles;
+    for (QString &file : selected) {
+        linuxFiles.append("file://" + file);
+    }
+    return linuxFiles;
+#endif
+
+    return selected;
 }

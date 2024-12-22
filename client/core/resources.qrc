@@ -38,5 +38,10 @@
         <file>ui/qml/Components/CustomButton.qml</file>
         <file>ui/qml/Components/ToolTipType.qml</file>
         <file>images/icon.png</file>
+        <file>ui/qml/Controls/PlayList.qml</file>
+        <file>ui/qml/Components/VideosDelegate.qml</file>
+        <file>images/svg/playlist.svg</file>
+        <file>images/svg/plus.svg</file>
+        <file>images/svg/play.svg</file>
     </qresource>
 </RCC>

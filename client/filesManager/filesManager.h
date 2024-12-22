@@ -8,11 +8,11 @@
 
 #include "../settings/settingsManager.h"
 
-class AppManager : public QObject
+class FilesManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit AppManager(QObject *parent = nullptr);
+    explicit FilesManager(QObject *parent = nullptr);
 
     Q_INVOKABLE QString selectFile();
 

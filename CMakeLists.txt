@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 6.5 REQUIRED COMPONENTS
     Core Gui Quick QuickControls2 Widgets
     Multimedia MultimediaWidgets)
+find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
 set(SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/client/main.cpp
@@ -31,6 +32,8 @@ qt_add_executable(Birdo
     ${SOURCES}
     ${HEADERS}
 )
+
+qt_add_translations(Birdo TS_FILES client/core//translation/Birdo_en_US.ts)
 
 set_target_properties(Birdo PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
