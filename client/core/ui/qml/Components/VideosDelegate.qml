@@ -57,8 +57,6 @@ Rectangle {
             ? "qrc:/images/svg/Stop_Icon.svg"
             : "qrc:/images/svg/play.svg"
 
-        onHoverBackgroundColor: "#000000"
-
         iconWidth: 18
         iconHeight: 18
         width: 24

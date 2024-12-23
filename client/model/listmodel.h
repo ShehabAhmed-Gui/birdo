@@ -27,8 +27,8 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role);
 
 public:
-    void extracted(QVector<QString> &selected);
     Q_INVOKABLE void loadVideos();
+    Q_INVOKABLE void clearPlaylist();
     Q_INVOKABLE QString getPrevious(const qsizetype &index) const;
     Q_INVOKABLE QString getNext(const qsizetype &index) const;
 
