@@ -282,12 +282,9 @@ Rectangle {
         CustomButton {
             id: playListBtn
             Layout.alignment: Qt.AlignVCenter
-
-            width: 30
-            height: 30
+            buttonRadius: 5
 
             backgroundColor: "transparent"
-            onHoverBackgroundColor: "#1A1A19"
 
             iconSource: "qrc:/images/svg/playlist.svg"
 

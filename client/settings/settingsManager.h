@@ -16,6 +16,7 @@ public:
 
 
     QStringList getKeys(QString group);
+    void removeKey(QString group, QString key);
 
     Q_INVOKABLE inline QString getSettLocation() const {
         return m_settingsLocation;

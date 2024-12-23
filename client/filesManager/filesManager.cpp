@@ -8,10 +8,6 @@ FilesManager::FilesManager(QObject *parent)
 
 FilesManager::~FilesManager()
 {
-    if (!selectedFiles.isEmpty()) {
-        const QString &videosPath = selectedFiles.last();
-        settings.saveSettings("VideosPath", "lastSelectedPath", videosPath);
-    }
 }
 
 // QString FilesManager::selectFile()
@@ -40,6 +36,12 @@ FilesManager::~FilesManager()
 QVector<QString> FilesManager::selectFiles()
 {
     selectedFiles = m_dialog.getOpenFileNames(nullptr, "Select A Bunch Of Videos", m_defaultPath, supportedVids);
+
+    if (!selectedFiles.isEmpty()) {
+        const QString &videosPath = selectedFiles.last();
+        settings.saveSettings("VideosPath", "lastSelectedPath", videosPath);
+        m_defaultPath = videosPath;
+    }
 
 #ifdef Q_OS_LINUX
     QVector<QString> linuxFiles;
