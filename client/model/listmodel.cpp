@@ -86,6 +86,15 @@ void ListModel::loadVideos()
     }
 }
 
+void ListModel::deleteItem(const qsizetype &index)
+{
+    if (index != 0  || !(index > m_data.size())) {
+        beginRemoveRows(QModelIndex(), index, index);
+            m_data.removeAt(index);
+        endRemoveRows();
+    } else { qDebug() << "Item doesn't exist"; }
+}
+
 void ListModel::clearPlaylist()
 {
     beginRemoveRows (QModelIndex(), m_data.first().toInt(), m_data.size());

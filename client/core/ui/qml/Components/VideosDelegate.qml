@@ -95,4 +95,20 @@ Rectangle {
 
         wrapMode: Text.WordWrap
     }
+
+    CustomButton {
+        id: deleteItem
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+
+        iconSource: "qrc:/images/svg/trash.svg"
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+            onClicked: listModel.deleteItem(index);
+        }
+    }
 }

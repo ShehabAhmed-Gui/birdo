@@ -28,6 +28,7 @@ public:
 
 public:
     Q_INVOKABLE void loadVideos();
+    Q_INVOKABLE void deleteItem(const qsizetype &index);
     Q_INVOKABLE void clearPlaylist();
     Q_INVOKABLE QString getPrevious(const qsizetype &index) const;
     Q_INVOKABLE QString getNext(const qsizetype &index) const;
