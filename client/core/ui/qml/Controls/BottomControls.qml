@@ -43,20 +43,6 @@ Rectangle {
                (second < 10 ? "0" + second : second);
     }
 
-    signal videoStateChanged()
-
-    Component.onCompleted: root.videoStateChanged.connect(videoIsPlaying)
-
-    function videoIsPlaying() {
-        if(video.playbackState === MediaPlayer.PlayingState) {
-            startStopButton.ToolTip.text = qsTr("Pause")
-            startStopButton.iconSource = "qrc:/images/svg/Stop_Icon.svg"
-        } else {
-            startStopButton.ToolTip.text = qsTr("Play")
-            startStopButton.iconSource = "qrc:/images/play-button.png"
-        }
-    }
-
     property bool userChangingSlider: false
     property Timer userInteractionTimer: Timer {
         interval: 300
@@ -118,6 +104,11 @@ Rectangle {
             Connections {
                 target: video
                 function onPositionChanged() {
+                    // playing next video once current video ends
+                    if (video.position === video.duration){
+                        playlist.listView.playNext()
+                    }
+
                     if (!userChangingSlider) {
                         videoSlider.value = video.position / 1000
                     }
@@ -291,12 +282,9 @@ Rectangle {
         CustomButton {
             id: playListBtn
             Layout.alignment: Qt.AlignVCenter
-
-            width: 30
-            height: 30
+            buttonRadius: 5
 
             backgroundColor: "transparent"
-            onHoverBackgroundColor: "#1A1A19"
 
             iconSource: "qrc:/images/svg/playlist.svg"
 

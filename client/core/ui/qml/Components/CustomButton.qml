@@ -9,7 +9,7 @@ Button {
     id: root
 
     property string backgroundColor: "transparent"
-    property string onHoverBackgroundColor: "#6b6a58"
+    property string onHoverBackgroundColor: "darkslategray"
     property string buttonBorderColor: "transparent"
 
     property double backgroundOpacity: 1

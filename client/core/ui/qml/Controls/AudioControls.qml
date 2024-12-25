@@ -9,15 +9,10 @@ Item {
 
     property alias volumeSlider: volumeSlider
     property alias volumeButton: volume
-    property alias volumeLevel: volumeSlider.value
+    property int volumeLevel
 
     function setMuted(muted) {
-        switch (muted) {
-        case true: video.muted = true; volumeButton.iconSource = "qrc:/images/mute.png"
-            break;
-        case false: video.muted = false; volumeButton.iconSource = "qrc:/images/volume-high.png"
-            break;
-        }
+        video.muted = muted
     }
 
     RowLayout {
@@ -32,15 +27,17 @@ Item {
                 toolTipText: video.muted? "Unmute" : "Mute"
             }
 
-            iconSource: volumeLevel === 0? "qrc:/images/mute.png" : volumeLevel <= 70? "qrc:/images/low-volume.png" : "qrc:/images/volume-high.png"
+              iconSource: ( video.muted || volumeLevel === 0? "qrc:/images/mute.png" : volumeLevel < 70
+                   ? "qrc:/images/low-volume.png"
+                   : "qrc:/images/volume-high.png")
+            iconWidth: 18
             iconHeight: 18
 
             MouseArea {
                 anchors.fill: parent
                 cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
                 onClicked: {
-                    video.muted? setMuted(false) : setMuted(true)
-                    parent.iconSource
+                    setMuted(!video.muted)
                 }
             }
         }
@@ -63,6 +60,7 @@ Item {
             value: (video.volume * 100).toFixed()
 
             onValueChanged: {
+                volumeLevel = value
                 video.volume = volumeSlider.value / 100
                 video.focus = true
             }

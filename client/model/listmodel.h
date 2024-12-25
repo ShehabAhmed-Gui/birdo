@@ -13,7 +13,7 @@ class ListModel : public QAbstractListModel
 public:
     ListModel(QObject *parent = 0);
 
-    ~ListModel() {};
+    ~ListModel();
 
 enum data {
     name = Qt::UserRole,
@@ -27,14 +27,16 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role);
 
 public:
-    void extracted(QVector<QString> &selected);
     Q_INVOKABLE void loadVideos();
+    Q_INVOKABLE void deleteItem(const qsizetype &index);
+    Q_INVOKABLE void clearPlaylist();
     Q_INVOKABLE QString getPrevious(const qsizetype &index) const;
     Q_INVOKABLE QString getNext(const qsizetype &index) const;
 
 private:
     QVector<QString> m_data;
     FilesManager filesManager;
+    SettingsManager settings;
     static qsizetype currentIndex;
 };
 

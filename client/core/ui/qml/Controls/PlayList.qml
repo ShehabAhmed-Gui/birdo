@@ -27,6 +27,21 @@ Rectangle {
             height: 50
             color: "transparent"
 
+            CustomButton {
+                id: clearPlaylist
+                anchors.verticalCenter: addItems.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+
+                iconSource: "qrc:/images/svg/trash.svg"
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: listModel.clearPlaylist()
+                }
+            }
+
             Text {
                 id: playlistTitle
                 text: "Videos Playlist"
@@ -40,9 +55,9 @@ Rectangle {
             }
 
             CustomButton {
+                id: addItems
                 iconSource: "qrc:/images/svg/plus.svg"
                 backgroundColor: "transparent"
-                onHoverBackgroundColor: "lightblue"
 
                 width: iconWidth + 5
                 height: iconHeight + 5
@@ -79,7 +94,9 @@ Rectangle {
 
             onPlayNext: {
                 video.source = Qt.url(listModel.getNext(currentIndex))
-                video.play()
+                Qt.callLater(() => {
+                    video.play()
+                });
             }
 
             onPlayPrevious: {

@@ -57,8 +57,6 @@ Rectangle {
             ? "qrc:/images/svg/Stop_Icon.svg"
             : "qrc:/images/svg/play.svg"
 
-        onHoverBackgroundColor: "#000000"
-
         iconWidth: 18
         iconHeight: 18
         width: 24
@@ -96,5 +94,21 @@ Rectangle {
         font.weight: 400
 
         wrapMode: Text.WordWrap
+    }
+
+    CustomButton {
+        id: deleteItem
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+
+        iconSource: "qrc:/images/svg/trash.svg"
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
+
+            onClicked: listModel.deleteItem(index);
+        }
     }
 }
