@@ -14,7 +14,6 @@ public:
 
     ~SettingsManager();
 
-
     QStringList getKeys(QString group);
     void removeKey(QString group, QString key);
 

@@ -104,6 +104,10 @@ Rectangle {
 
         iconSource: "qrc:/images/svg/trash.svg"
 
+        ToolTipType {
+            toolTipText: "Delete video"
+        }
+
         MouseArea {
             anchors.fill: parent
             cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
