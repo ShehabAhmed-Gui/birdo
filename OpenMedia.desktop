@@ -6,3 +6,4 @@ Terminal=false
 Type=Application
 MimeType=video/mp4;video/wav
 Categories=AudioVideo;video;
+Name[en_US]=OpenMedia.desktop
