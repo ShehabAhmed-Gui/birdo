@@ -35,6 +35,10 @@ Rectangle {
 
                 iconSource: "qrc:/images/svg/trash.svg"
 
+                ToolTipType {
+                    toolTipText: "Remove all videos"
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: parent.hovered? Qt.PointingHandCursor : Qt.ArrowCursor
@@ -65,6 +69,10 @@ Rectangle {
                 anchors.right: parent.right
                 anchors.rightMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
+
+                ToolTipType {
+                    toolTipText: "Add videos"
+                }
 
                 MouseArea {
                     anchors.fill: parent

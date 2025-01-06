@@ -1,7 +1,7 @@
 #include "filesManager.h"
 
 FilesManager::FilesManager(QObject *parent)
-    : QObject{parent}, supportedVids("*.mp4 *.wav"), settings{SettingsManager()}
+    : QObject{parent}, supportedVids("*.mp4 *.wav *.mkv"), settings{SettingsManager()}
 {
     m_defaultPath = settings.getSetting("VideosPath", "lastSelectedPath").toString().remove("file://");
 }
