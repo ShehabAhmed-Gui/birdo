@@ -1,26 +1,19 @@
-# Birdo
-## _Mediaplayer application_
-Birdo is a Mediaplayer application. local videos player plays videos from your computer.
-
-![Image](metadata/Images/screen-1.png)
-
-![Image](metadata/Images/screen-2.png)
-
-![Image](metadata/Images/screen-3.png)
+# OpenMedia
+## _Media Player Application_
+OpenMedia is a media player application. plays local videos from your computer.
 
 ## Features
-- Birdo saves settings such as volume leve, playlist items, etc...
-- Very easy to use - Add a bunch of videos from your computer, and that's it Birdo will play it.
+- OpenMedia saves settings such as volume leve, playlist items, etc...
+- Very easy to use - Add a bunch of videos from your computer, and that's it OpenMedia will play it.
 - Loud volume, increasing the volume to 100 will have a louder sound compared to other video players.
 
 ## Links
 
-[Twitter (X)](https://twitter.com/Shehab_Ahmed05)
 [Telegram](https://t.me/ShehabGuii)
 
 ## Tech
 
-Birdo uses several open-source projects to work:
+OpenMedia uses several open-source projects to work:
 
 - [Qt](https://www.qt.io/)
 
