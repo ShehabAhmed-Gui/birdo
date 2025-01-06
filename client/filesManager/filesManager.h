@@ -12,7 +12,8 @@ class FilesManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit FilesManager(QObject *parent = nullptr);
+
+    explicit FilesManager(QObject *parent = 0);
     ~FilesManager();
 
     // Q_INVOKABLE QString selectFile();

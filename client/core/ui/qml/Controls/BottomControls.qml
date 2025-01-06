@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
 
-import com.qt.birdo 1.0
+import com.qt.openmedia
 
 import "../Components"
 

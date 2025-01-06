@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Birdo VERSION 1.0 LANGUAGES CXX)
+project(OpenMedia VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -12,7 +12,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS
 find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
 set(SOURCES
-    ${CMAKE_CURRENT_LIST_DIR}/client/main.cpp
+    client/main.cpp
     client/settings/settingsManager.cpp
     client/filesManager/filesManager.cpp
     client/model/listmodel.cpp
@@ -28,20 +28,20 @@ qt_standard_project_setup()
 
 qt6_add_resources(SOURCES "client/core/resources.qrc")
 
-qt_add_executable(Birdo
+qt_add_executable(OpenMedia
     ${SOURCES}
     ${HEADERS}
 )
 
-qt_add_translations(Birdo TS_FILES client/core//translation/Birdo_en_US.ts)
+qt_add_translations(OpenMedia TS_FILES client/core//translation/OpenMedia_en_US.ts)
 
-set_target_properties(Birdo PROPERTIES
+set_target_properties(OpenMedia PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
 )
 
-target_link_libraries(Birdo PRIVATE
+target_link_libraries(OpenMedia PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Quick
@@ -52,7 +52,7 @@ target_link_libraries(Birdo PRIVATE
 )
 
 include(GNUInstallDirs)
-install(TARGETS Birdo
+install(TARGETS OpenMedia
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

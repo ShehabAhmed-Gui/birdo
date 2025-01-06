@@ -17,10 +17,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    qmlRegisterSingletonInstance<SettingsManager>("com.qt.birdo", 1, 0, "AppSettings", new SettingsManager(&app));
-    qmlRegisterSingletonInstance<FilesManager>("com.qt.birdo", 1, 0, "AppManager", new FilesManager(&app));
+    qmlRegisterSingletonInstance<SettingsManager>("com.qt.openmedia", 1, 0, "AppSettings", new SettingsManager(&app));
+    qmlRegisterSingletonInstance<FilesManager>("com.qt.openmedia", 1, 0, "AppManager", new FilesManager(&app));
 
-    qmlRegisterType<ListModel>("com.qt.birdo", 1, 0, "MVideos");
+    qmlRegisterType<ListModel>("com.qt.openmedia", 1, 0, "MVideos");
 
     engine.load(QUrl(QStringLiteral("qrc:/ui/qml/Main.qml")));
 

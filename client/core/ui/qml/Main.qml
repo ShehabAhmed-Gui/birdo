@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.Fusion
 import QtMultimedia
-import com.qt.birdo 1.0
+import com.qt.openmedia
 
 import "Controls"
 import "Components"
@@ -19,7 +19,7 @@ ApplicationWindow {
     minimumHeight: 460
     minimumWidth: 640
     visible: true
-    title: qsTr("Birdo")
+    title: qsTr("OpenMedia")
     color: "#000000"
     Component.onCompleted: {
         console.debug("Application Started")

@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import com.qt.birdo 1.0
+import com.qt.openmedia
 
 import "../Components"
 
