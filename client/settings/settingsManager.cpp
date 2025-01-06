@@ -2,7 +2,7 @@
 
 SettingsManager::SettingsManager(QObject *parent)
     : QObject{parent},
-    m_settings(QSettings::NativeFormat, QSettings::UserScope, "Birdo", "Birdo"),
+    m_settings(QSettings::NativeFormat, QSettings::UserScope, "OpenMedia", "OpenMedia"),
     m_settingsLocation(m_settings.fileName())
 {}
 
